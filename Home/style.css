@@ -1,0 +1,23 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.fixed-bottom-buttons {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333333;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.fixed-bottom-buttons button{
+    height: 5vh;
+    width: 20vw;
+    font-size: 2vh;
+    text-align: center;
+}
