@@ -3,6 +3,20 @@
     padding: 0px;
 }
 
+body {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.nav {
+    height: 10vh;
+    width: 100vw;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}
+
 .fixed-bottom-buttons {
     position: fixed;
     bottom: 0;
@@ -23,5 +37,49 @@
 }
 
 .tasks {
-    
+    margin-top: 10vh;
+    display: flex;
+    height: 80vh;
+    width: 90vw;
+}
+
+.tasks .card {
+    border-radius: 1rem;
+    height: 14rem;
+    width: 10rem;
+    padding: 5px;
+    color: white;
+    background-color: #333333;
+    margin-right: 5px;
+}
+
+.tasks .card .name{
+    font-size: 1.2rem;
+}
+
+.tasks .card .description{
+    font-size: 1rem;
+}
+
+.tasks .card .timeToComplete{
+    font-size: 1rem;
+    color: grey;
+}
+
+.tasks .card .fins{
+    font-size: 1rem;
+    color: lightskyblue;
+}
+
+.tasks .card .completeTask {
+    font-size: 1rem;
+    height: 2rem;
+    width: 8rem;
+    margin: 0 auto;
+    display: block;
+    border: none;
+    border-radius: 10px;
+   background-color: rgb(0, 150, 0);
+   color: white;
+
 }
