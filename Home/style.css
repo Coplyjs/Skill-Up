@@ -12,9 +12,26 @@ body {
 .nav {
     height: 10vh;
     width: 100vw;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     position: absolute;
+    
+    display: flex;
+    justify-content: space-between; /* pushes content to edges */
+    align-items: center; /* vertically center content */
+    padding: 0 20px; /* optional horizontal padding */
+}
+
+.nav h1 {
+    margin: 0; /* remove default margin */
+}
+
+#profile {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .fixed-bottom-buttons {
