@@ -1,0 +1,29 @@
+light-mode-colors
+  3C467B rgb(60, 70, 123) - azul escuro
+  50589C rgb(80, 88, 156) - azul meio escuro
+  636CCB rgb(99, 108, 203) - azul meio claro
+  6E8CFB rgb(110, 140, 251) - azul calro
+
+dark-mode-colors
+  1B3C53 rgb(27, 60, 83) - azul escuro
+  234C6A rgb(35, 76, 106) - azul médio
+  456882 rgb(69, 104, 130) - azul claro
+  D2C1B6 rgb(210, 193, 182) - bege
+
+halloween-mode-colors
+  3B060A rgb(59, 6, 10) - vinho
+  8A0000 rgb(138, 0, 0) - vermelho
+  C83F12 rgb(200, 63, 18) - laranja
+  FFF287 rgb(255, 242, 135) - amarelo
+
+christmas-mode-colors
+  662222 rgb(102, 34, 34) - vinho
+  842A3B rgb(132, 42, 59) - rosa escuro
+  A3485A rgb(163, 72, 90) - rosa
+  F5DAA7 rgb(245, 218, 167) - amarelo
+
+pirate-mode-colors
+  BF092F rgb(191, 9, 47) - vermelho
+  132440 rgb(19, 36, 64) - azul escuro
+  16476A rgb(22, 71, 106) - azul
+  3B9797 rgb(59, 151, 151) - ciano
