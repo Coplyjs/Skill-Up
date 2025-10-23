@@ -72,24 +72,22 @@ body {
     color: lightskyblue;
 }
 
-.container .card .options {
-  display: flex;
-  justify-content: space-around; /* even spacing between icons */
-  align-items: center;
-  margin-top: auto;
-  padding-bottom: 0.3rem;
+.container .card .completeTask {
+    font-size: 1rem;
+    height: 2rem;
+    width: 8rem;
+    margin: 0 auto 5px auto;
+    display: block;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(0, 150, 0);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.fa-pen:hover{
-  color: #fffb00;
-}
-
-i.fa-trash:hover {
-  color: #F44336;
-}
-
-i.fa-check:hover {
-  color: #00bb00;
+.container .card .completeTask:hover {
+    background-color: rgb(0, 180, 0);
 }
 
 .fixed-bottom-buttons {

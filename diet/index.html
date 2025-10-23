@@ -20,29 +20,38 @@
 </nav>
 
   <div class="container">
-    <!-- Card de Calorias -->
+    <!-- Caloric tracker -->
     <div class="card">
       <div class="name">Calorias</div>
       <div class="description">Meta: <span id="calGoal">2000</span> kcal</div>
       <div class="fins">Consumido: <span id="calConsumed">0</span> kcal</div>
-      <button class="completeTask" onclick="addCalories()">Editar</button>
+
+      <div class="options">
+        <i class="fa-solid fa-check" style="font-size: 26px" onclick="alert('Complete')"></i>
+        <i class="fa-solid fa-pen" style="font-size: 20px" onclick="alert('Edit')"></i>
+        <i class="fa-solid fa-trash" style="font-size: 20px" onclick="alert('Delete')"></i>
+      </div>
     </div>
 
-    <!-- Card de Água -->
+    <!-- Water tracker -->
     <div class="card">
-      <div class="name">Água</div>
-      <div class="description">Meta: <span id="waterGoal">2000</span> ml</div>
-      <div class="fins">Consumido: <span id="waterConsumed">0</span> ml</div>
-      <button class="completeTask" onclick="addWater()">Editar</button>
-    </div>
+      <div class="name">Water</div>
+      <div class="description">Meta: <span id="calGoal">2000</span> kcal</div>
+      <div class="fins">Consumido: <span id="calConsumed">0</span> kcal</div>
+
+      <div class="options">
+        <i class="fa-solid fa-check" style="font-size: 26px" onclick="alert('Complete')"></i>
+        <i class="fa-solid fa-pen" style="font-size: 20px" onclick="alert('Edit')"></i>
+        <i class="fa-solid fa-trash" style="font-size: 20px" onclick="alert('Delete')"></i>
+      </div>
   </div>
 
 <div class="fixed-bottom-buttons">
-  <button type="button" class="btn btn-primary"><i class="fa-solid fa-utensils" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-secondary"><i class="fa-solid fa-dumbbell" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-success"><i class="fa-solid fa-list-check" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-danger"><i class="fa-solid fa-fire" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-warning"><i class="fa-solid fa-cart-shopping" style="color: #ffffff; font-size: 32px"></i></button>
+  <button type="button" class="btn btn-primary" onclick="window.location.href = '/diet/index.html'"><i class="fa-solid fa-utensils" style="color: #ffffff; font-size: 32px"></i></button>
+  <button type="button" class="btn btn-secondary" onclick="window.location.href = '/workout/index.html'"><i class="fa-solid fa-dumbbell" style="color: #ffffff; font-size: 32px"></i></button>
+  <button type="button" class="btn btn-success" onclick="window.location.href = '/home/index.html'"><i class="fa-solid fa-list-check" style="color: #ffffff; font-size: 32px"></i></button>
+  <button type="button" class="btn btn-danger" onclick="window.location.href = '/streak/index.html'"><i class="fa-solid fa-fire" style="color: #ffffff; font-size: 32px"></i></button>
+  <button type="button" class="btn btn-warning" onclick="window.location.href = '/store/index.html'"><i class="fa-solid fa-cart-shopping" style="color: #ffffff; font-size: 32px"></i></button>
 </div>
 
   <script src="script.js"></script>
