@@ -1,59 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Up Skill</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Diet Tracker</title>
 
-    <!-- Bootstrap CSS & Icons-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- CSS-->
-  <link rel="stylesheet" href="style.css">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <nav class="nav">
-    <h1>Diet Tracker</h1>
-    <button class="profile"><i class="fa-solid fa-circle-user" style="color: #000; font-size: 64px"></i></button>
+<h1>Diet Tracker</h1>
+<button class="profile"><i class="fa-solid fa-circle-user" style="color: #000; font-size: 64px"></i></button>
 </nav>
 
-  <div class="container">
-    <!-- Caloric tracker -->
-    <div class="card">
-      <div class="name">Calorias</div>
-      <div class="description">Meta: <span id="calGoal">2000</span> kcal</div>
-      <div class="fins">Consumido: <span id="calConsumed">0</span> kcal</div>
 
-      <div class="options">
-        <i class="fa-solid fa-check" style="font-size: 26px" onclick="alert('Complete')"></i>
-        <i class="fa-solid fa-pen" style="font-size: 20px" onclick="alert('Edit')"></i>
-        <i class="fa-solid fa-trash" style="font-size: 20px" onclick="alert('Delete')"></i>
-      </div>
-    </div>
+<div class="container flex-column align-items-center">
+<h1>Controle de Refeições</h1>
 
-    <!-- Water tracker -->
-    <div class="card">
-      <div class="name">Water</div>
-      <div class="description">Meta: <span id="calGoal">2000</span> kcal</div>
-      <div class="fins">Consumido: <span id="calConsumed">0</span> kcal</div>
 
-      <div class="options">
-        <i class="fa-solid fa-check" style="font-size: 26px" onclick="alert('Complete')"></i>
-        <i class="fa-solid fa-pen" style="font-size: 20px" onclick="alert('Edit')"></i>
-        <i class="fa-solid fa-trash" style="font-size: 20px" onclick="alert('Delete')"></i>
-      </div>
-  </div>
+<button class="btn btn-success my-3" id="novaRefeicaoBtn">
+<i class="fa-solid fa-plus"></i> Nova Refeição
+</button>
 
-<div class="fixed-bottom-buttons">
-  <button type="button" class="btn btn-primary" onclick="window.location.href = '/diet/index.html'"><i class="fa-solid fa-utensils" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-secondary" onclick="window.location.href = '/workout/index.html'"><i class="fa-solid fa-dumbbell" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-success" onclick="window.location.href = '/home/index.html'"><i class="fa-solid fa-list-check" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-danger" onclick="window.location.href = '/streak/index.html'"><i class="fa-solid fa-fire" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-warning" onclick="window.location.href = '/store/index.html'"><i class="fa-solid fa-cart-shopping" style="color: #ffffff; font-size: 32px"></i></button>
+
+<div id="refeicoesContainer" class="w-100"></div>
+
+
+<div class="total-geral mt-4">
+<h4>Total Consumido no Dia: <span id="totalGeral">0</span> kcal</h4>
+</div>
 </div>
 
-  <script src="script.js"></script>
+
+<div class="modal fade" id="refeicaoModal" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title">Nova Refeição</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body">
+<div class="mb-3">
+<label class="form-label">Nome da refeição:</label>
+<input type="text" id="nomeRefeicao" class="form-control" placeholder="Ex: Almoço, Jantar..." />
+</div>
+
+
+<div id="alimentosLista"></div>
+
+
+<button class="btn btn-outline-primary mt-3" id="addAlimentoBtn">
+<i class="fa-solid fa-plus"></i> Adicionar Alimento
+</button>
+</div>
+<div class="modal-footer">
+<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+<button class="btn btn-success" id="salvarRefeicaoBtn">Salvar Refeição</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container">
+  <div class="card">
+    <div class="name">Água</div>
+    <div class="description">Meta: <span id="waterGoal">2000</span> ml</div>
+    <div class="fins">Consumido: <span id="waterConsumed">0</span> ml</div>
+    <button class="completeTask" onclick="addWater()">Editar</button>
+  </div>
+</div>
+
+
+<div class="fixed-bottom-buttons">
+<button type="button" class="btn btn-primary"><i class="fa-solid fa-utensils" style="color: #fff; font-size: 32px"></i></button>
+<button type="button" class="btn btn-secondary"><i class="fa-solid fa-dumbbell" style="color: #fff; font-size: 32px"></i></button>
+<button type="button" class="btn btn-success"><i class="fa-solid fa-list-check" style="color: #fff; font-size: 32px"></i></button>
+<button type="button" class="btn btn-danger"><i class="fa-solid fa-fire" style="color: #fff; font-size: 32px"></i></button>
+<button type="button" class="btn btn-warning"><i class="fa-solid fa-cart-shopping" style="color: #fff; font-size: 32px"></i></button>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
