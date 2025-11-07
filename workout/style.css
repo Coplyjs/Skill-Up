@@ -63,15 +63,15 @@ body {
     bottom: 0;
     width: 100%;
     background-color: #333333;
-    padding: 10px 0;
+    padding: 10px 10px;
     display: flex;
     justify-content: center;
     gap: 10px;
 }
 
 .fixed-bottom-buttons button {
-    height: 50px;
-    width: 18%;
+    height: 5vh;
+    width: 20vw;
     color: white;
     font-size: 20px;
 }
