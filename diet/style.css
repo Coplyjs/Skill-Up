@@ -1,4 +1,3 @@
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -142,16 +141,116 @@ body {
 }
 
 /* ---------- RESPONSIVIDADE ---------- */
+/* Tablet / telas médias: reduzir largura da nav e esconder textos longos */
 @media (max-width: 1024px) {
   .nav { width: 20vw; min-width: 120px; }
   .main-content { margin-left: 20vw; }
 }
 
+/* Nav mais compacta (ícones) para telas estreitas */
+@media (max-width: 900px) {
+  .nav {
+    width: 68px;
+    min-width: 68px;
+    padding: 8px 0;
+  }
+
+  .nav-title,
+  .profile {
+    display: none;
+  }
+
+  .fixed-bottom-buttons {
+    gap: 6px;
+  }
+
+  .nav-btn {
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .nav-btn i {
+    width: auto;
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .nav-btn .btn-text {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 68px;
+    padding: 20px;
+    max-width: calc(100% - 68px - 40px);
+  }
+}
+
+/* Mobile: transformar nav em barra inferior com ícones (melhor usabilidade) */
 @media (max-width: 600px) {
-  .nav { width: 28vw; min-width: 110px; }
-  .main-content { margin-left: 28vw; padding: 18px; }
-  .nav-btn { height: 48px; font-size: 0.95rem; }
-  .profile { height: 56px; }
+  .nav {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 100%;
+    height: 64px;
+    min-height: 64px;
+    border-right: none;
+    border-top: 2px solid #333;
+    flex-direction: row;
+    padding: 6px 8px;
+  }
+
+  .fixed-bottom-buttons {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .nav-btn {
+    height: 100%;
+    border-radius: 8px;
+    padding: 0;
+    justify-content: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.85rem;
+  }
+
+  .nav-btn i {
+    font-size: 18px;
+  }
+
+  .nav-btn .btn-text {
+    display: block;
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+
+  .nav-title,
+  .profile {
+    display: none;
+  }
+
+  /* garantir que o conteúdo não fique atrás da barra inferior */
+  .main-content {
+    margin-left: 0;
+    padding: 16px;
+    margin-bottom: 76px; /* reserva espaço para a nav inferior */
+    max-width: 100%;
+  }
+}
+
+/* Ajustes de modal em telas pequenas */
+.modal-dialog {
+  max-width: 95%;
+  margin: 1.75rem auto;
 }
 
 .modal-title,
