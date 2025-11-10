@@ -1,67 +1,124 @@
-body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f9fa;
+/* ...existing code... */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: "Josefin Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(135deg, #3C467B 0%, #50589C 100%);
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.login-group {
-    width: 320px;
-    padding: 30px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    box-sizing: border-box;
+/* centraliza todo o conteúdo vertical e horizontalmente */
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-.input-label {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 6px;
-    color: #333;
-    display: block;
+/* cartão de login */
+.login-card {
+  width: 380px;
+  max-width: 94%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
 }
 
-.login-input {
-    width: 100%;
-    padding: 8px 10px;
-    font-size: 14px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+/* marca */
+.brand {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 6px;
+  letter-spacing: 0.6px;
 }
 
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s ease;
+/* labels e inputs */
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  margin-top: 6px;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+  outline: none;
+  transition: box-shadow .18s ease, border-color .12s ease, background .12s ease;
 }
 
-a.create-accountant {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    font-size: 12px;
-    text-decoration: none;
-    color: #333;
-    transition: transform 0.6s ease;
+.input::placeholder { color: rgba(255,255,255,0.45); }
+
+.input:focus {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.28);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
 }
 
-a.create-accountant:hover {
-    color: #007bff;
-    text-decoration: underline;
+/* botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
 }
+
+.btn.primary {
+  background: linear-gradient(90deg,#2ecc71 0%, #27ae60 100%);
+  color: #04240f;
+  box-shadow: 0 8px 18px rgba(39,174,96,0.18);
+  transition: transform .12s ease, box-shadow .12s ease;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.btn.primary:hover { box-shadow: 0 12px 28px rgba(39,174,96,0.22); }
+.btn.primary:active { transform: translateY(1px); }
+
+/* link criar conta */
+.create-account {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: rgba(255,255,255,0.85);
+  font-size: 13px;
+  text-decoration: none;
+  transition: color .12s ease, transform .12s ease;
+}
+
+.create-account:hover {
+  color: #dff7ea;
+  transform: translateY(-2px);
+}
+
+/* responsividade */
+@media (max-width: 420px) {
+  .login-card { padding: 20px; }
+  .brand { font-size: 18px; }
+  .btn.primary { font-size: 15px; }
+}
+/* ...existing code... */
