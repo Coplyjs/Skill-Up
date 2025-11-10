@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("novaRefeicaoBtn").addEventListener("click", abrirModal);
   document.getElementById("addAlimentoBtn").addEventListener("click", addCampoAlimento);
   document.getElementById("salvarRefeicaoBtn").addEventListener("click", salvarRefeicao);
+
+  carregarLocalStorage(); // ← Carrega os dados salvos
+  agendarResetDiario();   // ← Programa reset à meia-noite
 });
 
 function abrirModal() {
@@ -120,6 +123,7 @@ function salvarRefeicao() {
   totalGeral += totalRefeicao;
 
   renderizarRefeicoes();
+  salvarLocalStorage(); // salva no localStorage
   modal.hide();
 }
 
@@ -151,6 +155,56 @@ function removerRefeicao(index) {
     totalGeral -= refeicoes[index].total;
     refeicoes.splice(index, 1);
     renderizarRefeicoes();
+    salvarLocalStorage(); // salva alteração
   }
 }
 
+/* ---------------------- LOCALSTORAGE ---------------------- */
+
+function salvarLocalStorage() {
+  const dataAtual = new Date().toLocaleDateString();
+  localStorage.setItem("refeicoesData", JSON.stringify({
+    refeicoes,
+    totalGeral,
+    data: dataAtual
+  }));
+}
+
+function carregarLocalStorage() {
+  const dataSalva = localStorage.getItem("refeicoesData");
+  if (!dataSalva) return;
+
+  const { refeicoes: refeicoesSalvas, totalGeral: totalSalvo, data } = JSON.parse(dataSalva);
+  const dataHoje = new Date().toLocaleDateString();
+
+  if (data === dataHoje) {
+    refeicoes = refeicoesSalvas || [];
+    totalGeral = totalSalvo || 0;
+    renderizarRefeicoes();
+  } else {
+    resetarDia();
+  }
+}
+
+/* ---------------------- RESET DIÁRIO ---------------------- */
+
+function resetarDia() {
+  refeicoes = [];
+  totalGeral = 0;
+  renderizarRefeicoes();
+  salvarLocalStorage();
+  console.log("Reiniciado automaticamente às 00h00.");
+}
+
+function agendarResetDiario() {
+  const agora = new Date();
+  const proximaMeiaNoite = new Date(agora);
+  proximaMeiaNoite.setHours(24, 0, 0, 0);
+
+  const tempoRestante = proximaMeiaNoite - agora;
+
+  setTimeout(() => {
+    resetarDia();
+    agendarResetDiario(); // agenda o próximo reset
+  }, tempoRestante);
+}
