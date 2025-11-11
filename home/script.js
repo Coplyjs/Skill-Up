@@ -68,12 +68,8 @@ function renderTasks() {
   const container = document.querySelector(".tasks");
   container.innerHTML = "";
 
-  const allTasks = [
-    ...tasks.map(t => ({ ...t, type: "normal" })),
-    ...dailyTasks.map(t => ({ ...t, type: "daily" }))
-  ];
-
-  allTasks.forEach((task, index) => {
+  // Render non-daily tasks (normal)
+  tasks.forEach((task, index) => {
     const card = document.createElement("div");
     card.className = "card p-3 mb-3 shadow-sm";
     if (task.completed) card.style.opacity = "0.6";
@@ -82,14 +78,46 @@ function renderTasks() {
       <h1 class="name">${task.name}</h1>
       <p class="description">${task.description}</p>
       <p class="fins">${task.fins} fins</p>
-      ${task.type === "daily" ? `<span class="badge bg-info">Daily</span>` : ""}
       <div class="d-flex gap-2 mt-2">
-        <button class="btn btn-success btn-sm" onclick="completeTask('${task.type}', ${index})">Complete</button>
-        <button class="btn btn-outline-danger btn-sm" onclick="removeTask('${task.type}', ${index})">
+        <button class="btn btn-success btn-sm">Complete</button>
+        <button class="btn btn-outline-danger btn-sm">
           <i class="fa-solid fa-trash"></i> Delete
         </button>
       </div>
     `;
+
+    // attach listeners using closure-captured index
+    const completeBtn = card.querySelector('.btn-success');
+    const deleteBtn = card.querySelector('.btn-outline-danger');
+    completeBtn.addEventListener('click', () => completeTask('normal', index));
+    deleteBtn.addEventListener('click', () => removeTask('normal', index));
+
+    container.appendChild(card);
+  });
+
+  // Render daily tasks
+  dailyTasks.forEach((task, index) => {
+    const card = document.createElement("div");
+    card.className = "card p-3 mb-3 shadow-sm";
+    if (task.completed) card.style.opacity = "0.6";
+
+    card.innerHTML = `
+      <h1 class="name">${task.name}</h1>
+      <p class="description">${task.description}</p>
+      <p class="fins">${task.fins} fins</p>
+      <span class="badge bg-info">Daily</span>
+      <div class="d-flex gap-2 mt-2">
+        <button class="btn btn-success btn-sm">Complete</button>
+        <button class="btn btn-outline-danger btn-sm">
+          <i class="fa-solid fa-trash"></i> Delete
+        </button>
+      </div>
+    `;
+
+    const completeBtn = card.querySelector('.btn-success');
+    const deleteBtn = card.querySelector('.btn-outline-danger');
+    completeBtn.addEventListener('click', () => completeTask('daily', index));
+    deleteBtn.addEventListener('click', () => removeTask('daily', index));
 
     container.appendChild(card);
   });
