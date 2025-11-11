@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Workout</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+ <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="nav">
+    <h1 class="nav-title">Workout</h1>
+
+    <div class="fixed-bottom-buttons">
+      <button type="button" class="nav-btn" onclick="window.location.href = '/diet/index.html'">
+        <i class="fa-solid fa-utensils"></i>
+        <span class="btn-text">Refeições</span>
+      </button>
+
+      <button type="button" class="nav-btn active" onclick="window.location.href = '/workout/index.html'">
+        <i class="fa-solid fa-dumbbell"></i>
+        <span class="btn-text">Treinos</span>
+      </button>
+
+      <button type="button" class="nav-btn" onclick="window.location.href = '/home/index.html'">
+        <i class="fa-solid fa-list-check"></i>
+        <span class="btn-text">Lista</span>
+      </button>
+
+      <button type="button" class="nav-btn" onclick="window.location.href = '/streak/index.html'">
+        <i class="fa-solid fa-fire"></i>
+        <span class="btn-text">Streak</span>
+      </button>
+
+      <button type="button" class="nav-btn" onclick="window.location.href = '/store/index.html'">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="btn-text">Loja</span>
+      </button>
+    </div>
+
+    <button class="profile"><i class="fa-solid fa-circle-user"></i></button>
+  </nav>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container main-content flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between align-items-center mb-3">
+      <h1 class="mb-0">Meus Treinos</h1>
+      <!-- Mantive IDs/estrutura usados para adicionar treino -->
+      <button id="novoTreinoBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#treinoModal">
+        <i class="fa-solid fa-plus"></i> Novo Treino
+      </button>
+    </div>
+
+    <!-- Mensagem / lista de treinos -->
+    <div id="treinosContainer" class="w-100"></div>
+  </main>
+
+  <!-- Modal Criar Treino -->
+  <div class="modal fade" id="treinoModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Novo Treino</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Nome do Treino</label>
+            <input type="text" id="nomeTreino" class="form-control" placeholder="Ex: Pernas, Peito..." />
+          </div>
+
+          <h6>Exercícios</h6>
+          <div id="exerciciosLista"></div>
+
+          <button type="button" id="addExercicioBtn" class="btn btn-outline-primary mt-3">
+            <i class="fa-solid fa-plus"></i> Adicionar Exercício
+          </button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" id="salvarTreinoBtn" class="btn btn-success">Salvar Treino</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS + seu script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="../workout/style.css" />
+  <script src="script.js"></script>
+</body>
+</html>
