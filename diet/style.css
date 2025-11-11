@@ -294,3 +294,73 @@ body {
   .nav-header { justify-content: center; }
   .nav-logo { width: 32px; height: 32px; }
 }
+
+:root {
+  --lm-1: #3C467B; /* azul escuro */
+  --lm-2: #50589C; /* azul meio escuro */
+  --lm-3: #636CCB; /* azul meio claro */
+  --lm-4: #6E8CFB; /* azul claro */
+}
+
+/* Paleta aplicada ao modal */
+.modal-content {
+  /* sem gradiente: cor sólida da paleta */
+  background: var(--lm-2);
+  color: #fff;
+  border: 1px solid var(--lm-3);
+  box-shadow: none;
+}
+
+.modal-header,
+.modal-footer {
+  /* sem gradiente: cor sólida */
+  background: var(--lm-3);
+  border-bottom: 1px solid var(--lm-4);
+  border-top: 1px solid var(--lm-4);
+}
+
+.modal-title { color: #fff !important; }
+
+.modal label,
+.modal .form-label {
+  color: #fff !important;
+}
+
+/* Inputs do modal: cor sólida */
+.modal .form-control,
+.modal input,
+.modal textarea {
+  background: var(--lm-2);
+  color: #fff;
+  border: 1px solid var(--lm-3);
+}
+
+/* Botões dentro do modal: sem gradiente */
+.modal .btn-outline-primary {
+  color: #fff;
+  border-color: var(--lm-3);
+  background: var(--lm-3);
+}
+
+.modal .btn-secondary {
+  background: var(--lm-1);
+  color: #fff;
+  border: none;
+}
+
+.modal .btn-success {
+  background: var(--lm-4);
+  border: none;
+  color: #fff;
+}
+
+.modal .form-control {
+  background: var(--lm-2);
+  color: #fff;
+  border: 1px solid var(--lm-3);
+}
+
+/* Placeholder branco levemente opaco dentro do modal */
+.modal .form-control::placeholder {
+  color: rgba(255,255,255,0.85);
+}

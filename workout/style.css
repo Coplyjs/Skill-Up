@@ -384,3 +384,17 @@ button.btn.btn-outline-danger.btn-remover-ex:active,
   border-color: #8a1f2a !important;
   color: #fff !important;
 }
+
+#novoTreinoBtn{
+  background-color: #2f3136 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+  border-width: 0.3vh !important;
+}
+
+#novoTreinoBtn:hover{
+  background-color: #FFF !important;
+  border-color: #FFF !important;
+  color: #2f3136 !important;
+  transition-delay: 30ms;
+}
