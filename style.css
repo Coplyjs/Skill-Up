@@ -1,296 +1,166 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
 }
 
-/* Corpo */
 body {
-  font-family: 'Josefin Sans', sans-serif;
-  background-color: #3C467B;
-  color: #fff;
-  min-height: 100vh;
-  overflow-x: hidden;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
-/* ---------- NAV LATERAL ---------- */
 .nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 16.5vw;     
-  min-width: 140px;  
-  height: 100vh;
-  background: #50589C;
-  border-right: 2px solid #333;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 12px 0;    
-  z-index: 1000;
+    height: 10vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    position: absolute;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 2px solid #333333;
 }
 
-/* Título */
-.nav-title {
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 8px 12px 10px 12px;
-  line-height: 1.2;
-}
-
-.fixed-bottom-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;  
-  margin: 6px 0;
-  gap: 0;              
-  flex: 1;         
-}
-
-
-.nav-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  height: 52px;           
-  padding: 0 18px;           
-  background: #2f3136 !important; 
-  color: #fff !important;
-  border: none !important;
-  border-radius: 0;        
-  text-align: left;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.15s ease;
-  box-shadow: none;
-}
-
-
-.nav-btn.btn,
-.nav-btn:focus,
-.nav-btn:active {
-  outline: none;
-  box-shadow: none;
-}
-
-.nav-btn i {
-  font-size: 20px;
-  width: 26px; 
-  text-align: center;
-  color: #fff;
-}
-
-.nav-btn .btn-text {
-  flex: 1;
-  text-align: left;
-}
-
-.nav-btn:hover {
-  background: #007bff !important;
+.nav h1 {
+    margin: 0; /* remove default margin */
 }
 
 .profile {
-  height: 64px;
-  background: #222;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.fixed-bottom-buttons {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333333;
+    padding: 10px 10px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.fixed-bottom-buttons button{
+    height: 5vh;
+    width: 20vw;
+    font-size: 2vh;
+    text-align: center;
+}
+
+.tasks {
+  padding-top: 2rem;
+  margin-top: 10vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 90vw;
+  max-width: 1200px;
+}
+
+.tasks .card {
+  background: linear-gradient(145deg, #3c3c3c, #2a2a2a);
+  border: none;
+  border-radius: 1rem;
   color: #fff;
-  border: 2px solid rgba(255,255,255,0.12);
+  padding: 1.2rem;
+  width: 220px;
+  min-height: 260px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.tasks .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+}
+
+.tasks .card .name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #00c6ff;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.tasks .card .description {
+  font-size: 0.95rem;
+  line-height: 1.3rem;
+  color: #ddd;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+.tasks .card .timeToComplete {
+  font-size: 0.9rem;
+  color: #aaa;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.tasks .card .fins {
+  font-size: 1rem;
+  color: #ffd166;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.tasks .card .completeTask {
+  font-size: 0.95rem;
+  height: 2.2rem;
+  width: 100%;
+  border: none;
   border-radius: 8px;
-  margin: 12px;
-  align-self: center;
-  width: calc(100% - 24px);
+  background: linear-gradient(135deg, #00c853, #009624);
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.tasks .card .completeTask:hover {
+  background: linear-gradient(135deg, #00e676, #00c853);
+  transform: scale(1.03);
+}
+
+.btn-close {
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+}
+
+/* Make the create task floating button clearly visible and clickable */
+.createTask {
+  position: fixed;
+  right: 20px;
+  bottom: 90px; /* above the bottom navigation */
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #ffd166, #ff9f1c);
+  color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  z-index: 1080; /* above modal/backdrop if needed */
   cursor: pointer;
 }
 
-.profile i {
-  font-size: 28px;
-}
-
-/* ---------- CONTEÚDO PRINCIPAL ---------- */
-.main-content {
-  margin-left: 16.5vw;  
-  padding: 28px;
-  max-width: calc(100% - 16.5vw - 40px);
-}
-
-.card {
-  border-radius: 10px;
-  background: #fff;
-  color: #000;
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 15px;
-}
-
-/* Total geral */
-.total-geral {
-  background: #007bff;
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
-  display: inline-block;
-}
-
-/* ---------- RESPONSIVIDADE ---------- */
-/* Tablet / telas médias: reduzir largura da nav e esconder textos longos */
-@media (max-width: 1024px) {
-  .nav { width: 20vw; min-width: 120px; }
-  .main-content { margin-left: 20vw; }
-}
-
-/* Nav mais compacta (ícones) para telas estreitas */
-@media (max-width: 900px) {
-  .nav {
-    width: 68px;
-    min-width: 68px;
-    padding: 8px 0;
-  }
-
-  .nav-title,
-  .profile {
-    display: none;
-  }
-
-  .fixed-bottom-buttons {
-    gap: 6px;
-  }
-
-  .nav-btn {
-    height: 56px;
-    padding: 0;
-    justify-content: center;
-  }
-
-  .nav-btn i {
-    width: auto;
-    margin: 0;
-    font-size: 20px;
-  }
-
-  .nav-btn .btn-text {
-    display: none;
-  }
-
-  .main-content {
-    margin-left: 68px;
-    padding: 20px;
-    max-width: calc(100% - 68px - 40px);
-  }
-}
-
-/* Mobile: transformar nav em barra inferior com ícones (melhor usabilidade) */
-@media (max-width: 600px) {
-  .nav {
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    min-width: 100%;
-    height: 64px;
-    min-height: 64px;
-    border-right: none;
-    border-top: 2px solid #333;
-    flex-direction: row;
-    padding: 6px 8px;
-  }
-
-  .fixed-bottom-buttons {
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-    flex: 1;
-  }
-
-  .nav-btn {
-    height: 100%;
-    border-radius: 8px;
-    padding: 0;
-    justify-content: center;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 0.85rem;
-  }
-
-  .nav-btn i {
-    font-size: 18px;
-  }
-
-  .nav-btn .btn-text {
-    display: block;
-    font-size: 0.7rem;
-    line-height: 1;
-  }
-
-  .nav-title,
-  .profile {
-    display: none;
-  }
-
-  /* garantir que o conteúdo não fique atrás da barra inferior */
-  .main-content {
-    margin-left: 0;
-    padding: 16px;
-    margin-bottom: 76px; /* reserva espaço para a nav inferior */
-    max-width: 100%;
-  }
-}
-
-/* Ajustes de modal em telas pequenas */
-.modal-dialog {
-  max-width: 95%;
-  margin: 1.75rem auto;
-}
-
-.modal-title,
-.modal label {
-  color: #000 !important;
-}
-
-.nav-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  justify-content: center;
-}
-
-.nav-logo {
-  width: 70px;
-  height: 70px;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-.total-geral.mt-4{
-  display: flex;
-  align-items: center;
-  background-color: #2f3136;
-}
-
-#novaRefeicaoBtn{
-  background-color: #2f3136 !important;
-  border-color: #ffffff !important;
-  color: #ffffff !important;
-  border-width: 0.3vh !important;
-}
-
-#novaRefeicaoBtn:hover{
-  background-color: #FFF !important;
-  border-color: #FFF !important;
-  color: #2f3136 !important;
-  transition-delay: 30ms;
-}
-
-/* opcional: reduz o título/ícone em telas pequenas */
-@media (max-width: 900px) {
-  .nav-header { justify-content: center; }
-  .nav-logo { width: 32px; height: 32px; }
-}
+.createTask:active { transform: translateY(1px); }
