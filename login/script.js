@@ -20,9 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (user) {
       localStorage.setItem("loggedUser", JSON.stringify(user));
-
-      alert("Login realizado com sucesso!");
-
       window.location.href = "/home/index.html";
     } else {
       alert("Email ou senha incorretos!");

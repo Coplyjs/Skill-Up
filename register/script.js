@@ -34,14 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
       email: email,
       password: password,
       tasks: [],
+      dailyTasks: [],
       fins: 0,
       createdAt: new Date().toISOString()
     };
 
     db.push(newUser);
     saveData(db);
-
-    alert("Usuário cadastrado com sucesso!");
 
     window.location.href = "/login/index.html";
   });
