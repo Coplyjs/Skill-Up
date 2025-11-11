@@ -257,3 +257,24 @@ body {
 .modal label {
   color: #000 !important;
 }
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  justify-content: center;
+}
+
+.nav-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* opcional: reduz o título/ícone em telas pequenas */
+@media (max-width: 900px) {
+  .nav-header { justify-content: center; }
+  .nav-logo { width: 32px; height: 32px; }
+}
