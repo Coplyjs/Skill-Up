@@ -39,7 +39,7 @@ function saveTask() {
   const fins = parseInt(document.getElementById("taskDifficulty").value);
 
   if (!name || !description) {
-    alert("Please fill in all fields!");
+    showThemeAlert("Por favor, preencha todos os campos!");
     return;
   }
 
@@ -68,8 +68,12 @@ function renderTasks() {
   const container = document.querySelector(".tasks");
   container.innerHTML = "";
 
-  // Render non-daily tasks (normal)
-  tasks.forEach((task, index) => {
+  const allTasks = [
+    ...tasks.map(t => ({ ...t, type: "normal" })),
+    ...dailyTasks.map(t => ({ ...t, type: "daily" }))
+  ];
+
+  allTasks.forEach((task, index) => {
     const card = document.createElement("div");
     card.className = "card p-3 mb-3 shadow-sm";
     if (task.completed) card.style.opacity = "0.6";
@@ -78,46 +82,14 @@ function renderTasks() {
       <h1 class="name">${task.name}</h1>
       <p class="description">${task.description}</p>
       <p class="fins">${task.fins} fins</p>
+      ${task.type === "daily" ? `<span class="badge bg-info">Daily</span>` : ""}
       <div class="d-flex gap-2 mt-2">
-        <button class="btn btn-success btn-sm">Complete</button>
-        <button class="btn btn-outline-danger btn-sm">
+        <button class="btn btn-success btn-sm" onclick="completeTask('${task.type}', ${index})">Complete</button>
+        <button class="btn btn-outline-danger btn-sm" onclick="removeTask('${task.type}', ${index})">
           <i class="fa-solid fa-trash"></i> Delete
         </button>
       </div>
     `;
-
-    // attach listeners using closure-captured index
-    const completeBtn = card.querySelector('.btn-success');
-    const deleteBtn = card.querySelector('.btn-outline-danger');
-    completeBtn.addEventListener('click', () => completeTask('normal', index));
-    deleteBtn.addEventListener('click', () => removeTask('normal', index));
-
-    container.appendChild(card);
-  });
-
-  // Render daily tasks
-  dailyTasks.forEach((task, index) => {
-    const card = document.createElement("div");
-    card.className = "card p-3 mb-3 shadow-sm";
-    if (task.completed) card.style.opacity = "0.6";
-
-    card.innerHTML = `
-      <h1 class="name">${task.name}</h1>
-      <p class="description">${task.description}</p>
-      <p class="fins">${task.fins} fins</p>
-      <span class="badge bg-info">Daily</span>
-      <div class="d-flex gap-2 mt-2">
-        <button class="btn btn-success btn-sm">Complete</button>
-        <button class="btn btn-outline-danger btn-sm">
-          <i class="fa-solid fa-trash"></i> Delete
-        </button>
-      </div>
-    `;
-
-    const completeBtn = card.querySelector('.btn-success');
-    const deleteBtn = card.querySelector('.btn-outline-danger');
-    completeBtn.addEventListener('click', () => completeTask('daily', index));
-    deleteBtn.addEventListener('click', () => removeTask('daily', index));
 
     container.appendChild(card);
   });
@@ -200,4 +172,62 @@ function resetTasksIfNeeded() {
 function getTodayDate() {
   const now = new Date();
   return now.toISOString().split("T")[0];
+}
+
+/* Theme alert helper: shows centered popup using site palette */
+function showThemeAlert(message, timeout = 3500) {
+  let alertEl = document.getElementById("themeAlert");
+  let msgEl = document.getElementById("themeAlertMessage");
+  let closeBtn = document.getElementById("themeAlertClose");
+  if (!alertEl || !msgEl || !closeBtn) return alert(message);
+
+  msgEl.textContent = message;
+
+  // Show: remove hidden then add show class to trigger CSS transitions
+  alertEl.removeAttribute("hidden");
+  // force reflow then add class
+  requestAnimationFrame(() => alertEl.classList.add("show"));
+
+  let hideTimeoutId = null;
+
+  function cleanupListeners() {
+    closeBtn.removeEventListener("click", hide);
+    document.removeEventListener("keydown", onKey);
+    alertEl.removeEventListener("transitionend", onTransitionEnd);
+  }
+
+  function hide() {
+    // start hide animation
+    alertEl.classList.remove("show");
+    // after transition ends, set hidden
+    // onTransitionEnd will handle hidden and cleanup
+    if (hideTimeoutId) {
+      clearTimeout(hideTimeoutId);
+      hideTimeoutId = null;
+    }
+  }
+
+  function onKey(e) {
+    if (e.key === "Escape") hide();
+  }
+
+  function onTransitionEnd(e) {
+    // wait for the inner element opacity/transform transition to finish
+    if (e.target && e.target.classList && e.target.classList.contains('theme-alert-inner')) {
+      if (!alertEl.classList.contains('show')) {
+        // fully hidden now
+        alertEl.setAttribute('hidden', '');
+        cleanupListeners();
+      }
+    }
+  }
+
+  closeBtn.addEventListener("click", hide);
+  document.addEventListener("keydown", onKey);
+  // listen on container for transitionend (from inner element)
+  alertEl.addEventListener("transitionend", onTransitionEnd);
+
+  if (timeout > 0) {
+    hideTimeoutId = setTimeout(hide, timeout);
+  }
 }

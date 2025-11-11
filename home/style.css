@@ -1,147 +1,873 @@
 * {
-    margin: 0px;
-    padding: 0px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Corpo */
 body {
-    align-items: center;
-    display: flex;
-    justify-content: center;
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: #3C467B;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
+/* ---------- NAV LATERAL ---------- */
 .nav {
-    height: 10vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    position: absolute;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    border-bottom: 2px solid #333333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16.5vw;        /* navbar em vw, ajusta com viewport */
+  min-width: 140px;     /* garante largura mínima */
+  height: 100vh;
+  background: #50589C;
+  border-right: 2px solid #333;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* importante: filhos ocupam largura total */
+  padding: 12px 0;      /* só topo e base */
+  z-index: 1000;
 }
 
-.nav h1 {
-    margin: 0; /* remove default margin */
+/* Título */
+.nav-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 8px 12px 10px 12px;
+  line-height: 1.2;
 }
 
-.profile {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-
+/* Área de botões: ocupar o espaço do meio da nav */
 .fixed-bottom-buttons {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #333333;
-    padding: 10px 10px;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;  /* botões ocupam 100% da largura da nav */
+  margin: 6px 0;
+  gap: 0;                /* sem espaçamento entre botões */
+  flex: 1;               /* ocupa o espaço disponível, empurra profile para baixo */
+}
+
+/* Botões longos, encostados uns nos outros */
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 52px;               /* "longos" na vertical — ajuste se quiser mais alto/baixo */
+  padding: 0 18px;            /* espaço interno */
+  background: #2f3136 !important; /* força cor (overrides Bootstrap) */
+  color: #fff !important;
+  border: none !important;
+  border-radius: 0;           /* sem arredondamento: ficam colados */
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  box-shadow: none;
+}
+
+/* Remover qualquer margem que botoes do bootstrap tenham */
+.nav-btn.btn,
+.nav-btn:focus,
+.nav-btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Ícone e texto: organizar visualmente */
+.nav-btn i {
+  font-size: 20px;
+  width: 26px;   /* largura fixa para alinhar texto */
+  text-align: center;
+  color: #fff;
+}
+
+.nav-btn .btn-text {
+  flex: 1;
+  text-align: left;
+}
+
+/* Hover/ativo */
+.nav-btn:hover {
+  background: #007bff !important;
+}
+
+/* Perfil fixado na base da nav */
+.profile {
+  height: 64px;
+  background: #222;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  margin: 12px;
+  align-self: center;
+  width: calc(100% - 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.profile i {
+  font-size: 28px;
+}
+
+/* ---------- CONTEÚDO PRINCIPAL ---------- */
+.main-content {
+  margin-left: 16.5vw;  
+  padding: 28px;
+  max-width: calc(100% - 16.5vw - 40px);
+}
+
+.card {
+  border-radius: 10px;
+  background: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+/* Total geral */
+.total-geral {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* ---------- RESPONSIVIDADE ---------- */
+/* Tablet / telas médias: reduzir largura da nav e esconder textos longos */
+@media (max-width: 1024px) {
+  .nav { width: 20vw; min-width: 120px; }
+  .main-content { margin-left: 20vw; }
+}
+
+/* Nav mais compacta (ícones) para telas estreitas */
+@media (max-width: 900px) {
+  .nav {
+    width: 68px;
+    min-width: 68px;
+    padding: 8px 0;
+  }
+
+  .nav-title,
+  .profile {
+    display: none;
+  }
+
+  .fixed-bottom-buttons {
+    gap: 6px;
+  }
+
+  .nav-btn {
+    height: 56px;
+    padding: 0;
     justify-content: center;
-    gap: 10px;
+  }
+
+  .nav-btn i {
+    width: auto;
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .nav-btn .btn-text {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 68px;
+    padding: 20px;
+    max-width: calc(100% - 68px - 40px);
+  }
 }
 
-.fixed-bottom-buttons button{
-    height: 5vh;
-    width: 20vw;
-    font-size: 2vh;
-    text-align: center;
+/* Mobile: transformar nav em barra inferior com ícones (melhor usabilidade) */
+@media (max-width: 600px) {
+  .nav {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 100%;
+    height: 64px;
+    min-height: 64px;
+    border-right: none;
+    border-top: 2px solid #333;
+    flex-direction: row;
+    padding: 6px 8px;
+  }
+
+  .fixed-bottom-buttons {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .nav-btn {
+    height: 100%;
+    border-radius: 8px;
+    padding: 0;
+    justify-content: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.85rem;
+  }
+
+  .nav-btn i {
+    font-size: 18px;
+  }
+
+  .nav-btn .btn-text {
+    display: block;
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+
+  .nav-title,
+  .profile {
+    display: none;
+  }
+
+  /* garantir que o conteúdo não fique atrás da barra inferior */
+  .main-content {
+    margin-left: 0;
+    padding: 16px;
+    margin-bottom: 76px; /* reserva espaço para a nav inferior */
+    max-width: 100%;
+  }
 }
 
+/* Ajustes de modal em telas pequenas */
+.modal-dialog {
+  max-width: 95%;
+  margin: 1.75rem auto;
+}
+
+.modal-title,
+.modal label {
+  color: #000 !important;
+}
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  justify-content: center;
+}
+
+.nav-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* opcional: reduz o título/ícone em telas pequenas */
+@media (max-width: 900px) {
+  .nav-header { justify-content: center; }
+  .nav-logo { width: 32px; height: 32px; }
+}
+
+:root {
+  --lm-1: #3C467B; /* azul escuro */
+  --lm-2: #50589C; /* azul meio escuro */
+  --lm-3: #636CCB; /* azul meio claro */
+  --lm-4: #6E8CFB; /* azul claro */
+}
+
+/* Paleta aplicada ao modal */
+.modal-content {
+  /* sem gradiente: cor sólida da paleta */
+  background: var(--lm-2);
+  color: #fff;
+  border: 1px solid var(--lm-3);
+  box-shadow: none;
+}
+
+.modal-header,
+.modal-footer {
+  /* sem gradiente: cor sólida */
+  background: var(--lm-3);
+  border-bottom: 1px solid var(--lm-4);
+  border-top: 1px solid var(--lm-4);
+}
+
+.modal-title { color: #fff !important; }
+
+.modal label,
+.modal .form-label {
+  color: #fff !important;
+}
+
+/* Inputs do modal: cor sólida */
+.modal .form-control,
+.modal input,
+.modal textarea {
+  background: var(--lm-2);
+  color: #fff;
+  border: 1px solid var(--lm-3);
+}
+
+/* Botões dentro do modal: sem gradiente */
+.modal .btn-outline-primary {
+  color: #fff;
+  border-color: var(--lm-3);
+  background: var(--lm-3);
+}
+
+.modal .btn-secondary {
+  background: var(--lm-1);
+  color: #fff;
+  border: none;
+}
+
+.modal .btn-success {
+  background: var(--lm-4);
+  border: none;
+  color: #fff;
+}
+
+.modal .form-control {
+  background: var(--lm-2);
+  color: #fff;
+  border: 1px solid var(--lm-3);
+}
+
+/* Placeholder branco levemente opaco dentro do modal */
+.modal .form-control::placeholder {
+  color: rgba(255,255,255,0.85);
+}
+
+/* Theme alert popup (centralized) */
+
+.theme-alert {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  pointer-events: none; /* allow clicks through when hidden */
+  background: rgba(0,0,0,0); /* backdrop transitions to semi-opaque */
+  transition: background 220ms ease;
+}
+
+.theme-alert[hidden] { display: none; }
+
+/* visible state for backdrop */
+.theme-alert.show {
+  pointer-events: auto;
+  background: rgba(0,0,0,0.35);
+}
+
+.theme-alert-inner {
+  pointer-events: auto;
+  background: linear-gradient(180deg, var(--lm-3), var(--lm-2));
+  color: #fff;
+  border: 1px solid var(--lm-4);
+  padding: 18px 20px;
+  border-radius: 12px;
+  min-width: 260px;
+  max-width: 90vw;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  display: flex;
+  gap: 20px; /* increased gap as requested */
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: transform 260ms cubic-bezier(.2,.9,.2,1), opacity 260ms ease;
+}
+
+.theme-alert.show .theme-alert-inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.theme-alert-message {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.theme-alert-close {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.theme-alert-close:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+/* Speech bubble with GIF - horizontal layout */
+.tasks-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.tasks-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 900px;
+  width: 100%;
+  justify-content: center;
+}
+
+.gif-container {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mascot-gif {
+  width: 150%;
+  height: 150%;
+  object-fit: contain;
+}
+
+.speech-bubble {
+  background: linear-gradient(180deg, var(--lm-4), var(--lm-3));
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  flex: 1;
+  min-width: 200px;
+  max-width: 500px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  transform: translateY(-6px);
+  opacity: 0;
+  transition: transform 300ms cubic-bezier(.2,.9,.2,1), opacity 300ms ease;
+}
+
+/* Arrow pointing left (towards GIF) */
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 12px solid var(--lm-3);
+}
+
+.speech-bubble.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .tasks-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .gif-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .speech-bubble {
+    max-width: 90vw;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+  }
+
+  /* Seta apontando para CIMA (o GIF fica acima do balão em mobile) */
+  .speech-bubble::after {
+    left: 50%;
+    transform: translateX(-50%);
+    top: -12px;
+    right: auto;
+    bottom: auto;
+    border-top: 0;
+    border-bottom: 12px solid var(--lm-3);
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+  }
+}
+
+
+
+/* Selects (dropdown) dentro do modal - usar a paleta em vez do fundo branco */
+.modal .form-select {
+  background: var(--lm-2);
+  color: #fff;
+  border: 1px solid var(--lm-3);
+}
+
+.modal .form-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(110,140,251,0.15);
+  border-color: var(--lm-4);
+}
+
+/* Tentativa de estilizar opções selecionadas (nem todos os browsers aplicam estilos em <option>) */
+.modal .form-select option {
+  background: var(--lm-2);
+  color: #fff;
+}
+
+.modal .form-select option:checked,
+.modal .form-select option[selected] {
+  background: var(--lm-3);
+  color: #fff;
+}
+
+.modal .form-control {
+  background: var(--lm-2);
+  color: #fff;
+  border: 1px solid var(--lm-3);
+}
+
+/* Placeholder branco levemente opaco dentro do modal */
+.modal .form-control::placeholder {
+  color: rgba(255,255,255,0.85);
+}
+
+button.btn.btn-outline-danger.btn-remover-ex,
+.btn-remover-ex {
+  border: 3px solid #dc3545 !important;
+  background: transparent !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+
+button.btn.btn-outline-danger.btn-remover-ex:hover,
+button.btn.btn-outline-danger.btn-remover-ex:focus,
+.btn-remover-ex:hover,
+.btn-remover-ex:focus {
+  background: #dc3545 !important; /* fundo vermelho no hover */
+  color: #fff !important;         /* texto branco no hover */
+  border-color: #b02a37 !important;
+}
+
+button.btn.btn-outline-danger.btn-remover-ex:active,
+.btn-remover-ex:active {
+  background: #b02a37 !important;
+  border-color: #8a1f2a !important;
+  color: #fff !important;
+}
+
+#novoTreinoBtn{
+  background-color: #2f3136 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+  border-width: 0.3vh !important;
+}
+
+#novoTreinoBtn:hover{
+  background-color: #FFF !important;
+  border-color: #FFF !important;
+  color: #2f3136 !important;
+  transition-delay: 30ms;
+}
+
+/* Regras específicas da home (preservadas do arquivo antigo): tarefas, cards e botão flutuante */
 .tasks {
   padding-top: 2rem;
-  margin-top: 10vh;
+  margin-top: 2rem;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  width: 90vw;
-  max-width: 1200px;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 900px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .tasks .card {
-  background: linear-gradient(145deg, #3c3c3c, #2a2a2a);
-  border: none;
-  border-radius: 1rem;
+  background: linear-gradient(135deg, var(--lm-3), var(--lm-2));
+  border: 1px solid var(--lm-4);
+  border-radius: 10px;
   color: #fff;
-  padding: 1.2rem;
-  width: 220px;
-  min-height: 260px;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 70px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
+  gap: 0.8rem;
   transition: all 0.3s ease;
 }
 
 .tasks .card:hover {
-  transform: translateY(-6px);
+  transform: translateX(6px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+  background: linear-gradient(135deg, var(--lm-4), var(--lm-3));
 }
 
 .tasks .card .name {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: #00c6ff;
-  margin-bottom: 0.5rem;
-  text-align: center;
+  color: #fff;
+  margin: 0;
+  text-align: left;
+  flex: 0 1 auto;
+  min-width: 120px;
 }
 
 .tasks .card .description {
-  font-size: 0.95rem;
-  line-height: 1.3rem;
-  color: #ddd;
-  text-align: center;
-  margin-bottom: 0.8rem;
+  font-size: 0.85rem;
+  line-height: 1.2rem;
+  color: rgba(255,255,255,0.8);
+  text-align: left;
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 150px;
 }
 
 .tasks .card .timeToComplete {
-  font-size: 0.9rem;
-  color: #aaa;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.7);
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  white-space: nowrap;
+  flex: 0 1 auto;
+  display: none;
 }
 
 .tasks .card .fins {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #ffd166;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
-  margin-bottom: 1rem;
+  margin: 0;
+  flex: 0 1 auto;
+  min-width: 50px;
 }
 
 .tasks .card .completeTask {
-  font-size: 0.95rem;
-  height: 2.2rem;
-  width: 100%;
+  font-size: 0.8rem;
+  height: 32px;
+  padding: 0 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   background: linear-gradient(135deg, #00c853, #009624);
   color: white;
   font-weight: 600;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  margin: 0;
+  flex: 0 0 auto;
+  cursor: pointer;
 }
 
 .tasks .card .completeTask:hover {
   background: linear-gradient(135deg, #00e676, #00c853);
-  transform: scale(1.03);
+  transform: scale(1.05);
+}
+
+/* Desktop: layout compacto em uma linha */
+@media (min-width: 1024px) {
+  .tasks .card {
+    min-height: 80px;
+    padding: 1.2rem;
+  }
+
+  .tasks .card .name {
+    font-size: 1.1rem;
+    flex: 0 0 150px;
+  }
+
+  .tasks .card .description {
+    font-size: 0.9rem;
+    flex: 1 1 auto;
+    min-width: 200px;
+  }
+
+  .tasks .card .timeToComplete {
+    display: block;
+  }
+
+  .tasks .card .fins {
+    font-size: 0.95rem;
+    min-width: 60px;
+  }
+
+  .tasks .card .completeTask {
+    font-size: 0.85rem;
+    height: 36px;
+    padding: 0 12px;
+  }
+}
+
+/* Tablet: layout adaptado */
+@media (max-width: 1023px) and (min-width: 769px) {
+  .tasks {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .tasks .card {
+    min-height: 75px;
+    padding: 0.9rem;
+    gap: 0.6rem;
+  }
+
+  .tasks .card .name {
+    font-size: 1rem;
+    flex: 0 0 120px;
+  }
+
+  .tasks .card .description {
+    font-size: 0.85rem;
+    flex: 1 1 auto;
+    min-width: 150px;
+  }
+
+  .tasks .card .timeToComplete {
+    display: none;
+  }
+
+  .tasks .card .fins {
+    font-size: 0.9rem;
+    min-width: 50px;
+  }
+
+  .tasks .card .completeTask {
+    font-size: 0.8rem;
+    height: 32px;
+    padding: 0 10px;
+  }
+}
+
+/* Mobile: layout em coluna flex */
+@media (max-width: 768px) {
+  .tasks {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    max-width: 100%;
+  }
+
+  .tasks .card {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+    padding: 0.8rem;
+    gap: 0.5rem;
+  }
+
+  .tasks .card .name {
+    font-size: 0.95rem;
+    flex: 1 1 auto;
+    min-width: auto;
+    margin-bottom: 0.3rem;
+  }
+
+  .tasks .card .description {
+    font-size: 0.8rem;
+    flex: 1 1 auto;
+    min-width: auto;
+    margin-bottom: 0.3rem;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .tasks .card .timeToComplete {
+    display: none;
+  }
+
+  .tasks .card .fins {
+    font-size: 0.85rem;
+    min-width: auto;
+    flex: 1 1 auto;
+  }
+
+  .tasks .card .completeTask {
+    font-size: 0.75rem;
+    height: 30px;
+    padding: 0 8px;
+    flex: 1 1 auto;
+  }
+
+  .btn-outline-danger.btn-sm {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    flex: 1 1 auto;
+  }
+}
+
+/* Mobile pequeno: muito compacto */
+@media (max-width: 480px) {
+  .tasks {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    gap: 0.8rem;
+  }
+
+  .tasks .card {
+    padding: 0.6rem;
+    gap: 0.4rem;
+  }
+
+  .tasks .card .name {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .tasks .card .description {
+    font-size: 0.75rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .tasks .card .fins {
+    font-size: 0.8rem;
+  }
+
+  .tasks .card .completeTask {
+    font-size: 0.7rem;
+    height: 28px;
+    padding: 0 6px;
+  }
 }
 
 .btn-close {
-    border: none;
-    background: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #aaa;
-    display: flex;
-    align-items: center;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #aaa;
+  display: flex;
+  align-items: center;
 }
 
 /* Make the create task floating button clearly visible and clickable */
@@ -153,7 +879,7 @@ body {
   width: 64px;
   border-radius: 50%;
   border: none;
-  background: linear-gradient(135deg, #ffd166, #ff9f1c);
+  background: #636CCB;
   color: #000;
   display: flex;
   align-items: center;
