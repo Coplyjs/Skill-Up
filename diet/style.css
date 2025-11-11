@@ -18,15 +18,15 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 16.5vw;        /* navbar em vw, ajusta com viewport */
-  min-width: 140px;     /* garante largura mínima */
+  width: 16.5vw;     
+  min-width: 140px;  
   height: 100vh;
   background: #50589C;
   border-right: 2px solid #333;
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* importante: filhos ocupam largura total */
-  padding: 12px 0;      /* só topo e base */
+  align-items: stretch;
+  padding: 12px 0;    
   z-index: 1000;
 }
 
@@ -40,28 +40,27 @@ body {
   line-height: 1.2;
 }
 
-/* Área de botões: ocupar o espaço do meio da nav */
 .fixed-bottom-buttons {
   display: flex;
   flex-direction: column;
-  align-items: stretch;  /* botões ocupam 100% da largura da nav */
+  align-items: stretch;  
   margin: 6px 0;
-  gap: 0;                /* sem espaçamento entre botões */
-  flex: 1;               /* ocupa o espaço disponível, empurra profile para baixo */
+  gap: 0;              
+  flex: 1;         
 }
 
-/* Botões longos, encostados uns nos outros */
+
 .nav-btn {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
-  height: 52px;               /* "longos" na vertical — ajuste se quiser mais alto/baixo */
-  padding: 0 18px;            /* espaço interno */
-  background: #2f3136 !important; /* força cor (overrides Bootstrap) */
+  height: 52px;           
+  padding: 0 18px;           
+  background: #2f3136 !important; 
   color: #fff !important;
   border: none !important;
-  border-radius: 0;           /* sem arredondamento: ficam colados */
+  border-radius: 0;        
   text-align: left;
   font-size: 1rem;
   cursor: pointer;
@@ -69,7 +68,7 @@ body {
   box-shadow: none;
 }
 
-/* Remover qualquer margem que botoes do bootstrap tenham */
+
 .nav-btn.btn,
 .nav-btn:focus,
 .nav-btn:active {
@@ -77,10 +76,9 @@ body {
   box-shadow: none;
 }
 
-/* Ícone e texto: organizar visualmente */
 .nav-btn i {
   font-size: 20px;
-  width: 26px;   /* largura fixa para alinhar texto */
+  width: 26px; 
   text-align: center;
   color: #fff;
 }
@@ -90,12 +88,10 @@ body {
   text-align: left;
 }
 
-/* Hover/ativo */
 .nav-btn:hover {
   background: #007bff !important;
 }
 
-/* Perfil fixado na base da nav */
 .profile {
   height: 64px;
   background: #222;
@@ -271,6 +267,26 @@ body {
   height: 70px;
   border-radius: 6px;
   object-fit: cover;
+}
+
+.total-geral.mt-4{
+  display: flex;
+  align-items: center;
+  background-color: #2f3136;
+}
+
+#novaRefeicaoBtn{
+  background-color: #2f3136 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+  border-width: 0.3vh !important;
+}
+
+#novaRefeicaoBtn:hover{
+  background-color: #FFF !important;
+  border-color: #FFF !important;
+  color: #2f3136 !important;
+  transition-delay: 30ms;
 }
 
 /* opcional: reduz o título/ícone em telas pequenas */
