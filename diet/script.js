@@ -1,4 +1,4 @@
-const apiKey = "4ta7q3VUgJWJzNpU32dxDkVGhsasDbglvf6PRXBA";
+const apiKey = "";
 let refeicoes = [];
 let totalGeral = 0;
 let modal;
@@ -207,4 +207,5 @@ function agendarResetDiario() {
     resetarDia();
     agendarResetDiario(); // agenda o próximo reset
   }, tempoRestante);
+
 }
