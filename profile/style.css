@@ -1,135 +1,331 @@
+:root {
+  --lm-1: #3C467B; /* azul escuro */
+  --lm-2: #50589C; /* azul meio escuro */
+  --lm-3: #636CCB; /* azul meio claro */
+  --lm-4: #6E8CFB; /* azul claro */
+}
+
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Corpo */
 body {
-    align-items: center;
-    display: flex;
-    justify-content: center;
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: #3C467B;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
+/* ---------- NAV LATERAL - Mobile First ---------- */
 .nav {
-    height: 10vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    position: absolute;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    border-bottom: 2px solid #333333;
-
+  position: fixed;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 64px;
+  background: #50589C;
+  border-top: 2px solid #333;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 8px;
+  z-index: 1000;
 }
 
 .nav h1 {
-    margin: 0;
+  display: none;
 }
 
-.profile {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
+.nav .profile {
+  display: none;
 }
 
-.container {
-    margin-top: 12vh;
-    display: flex;
-    height: 80vh;
-    width: 90vw;
-    justify-content: center;
-}
-
-.container .card {
-    border-radius: 1rem;
-    height: 14rem;
-    width: 10rem;
-    padding: 5px;
-    color: white;
-    background-color: #333333; /* same as first */
-    margin-right: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.container .card .name {
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.container .card .description {
-    font-size: 1rem;
-    margin-top: 0.3rem;
-}
-
-.container .card .fins {
-    font-size: 1rem;
-    color: lightskyblue;
-}
-
-.container .card .completeTask {
-    font-size: 1rem;
-    height: 2rem;
-    width: 8rem;
-    margin: 0 auto 5px auto;
-    display: block;
-    border: none;
-    border-radius: 10px;
-    background-color: rgb(0, 150, 0);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.container .card .completeTask:hover {
-    background-color: rgb(0, 180, 0);
-}
-
+/* Área de botões */
 .fixed-bottom-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  width: 100%;
+}
+
+/* Botões da nav */
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: auto;
+  height: 100%;
+  padding: 0;
+  justify-content: center;
+  flex: 1;
+  background: #2f3136 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  box-shadow: none;
+}
+
+.nav-btn i {
+  font-size: 18px;
+  color: #fff;
+}
+
+.nav-btn .btn-text {
+  display: block;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.nav-btn:hover {
+  background: #000000 !important;
+}
+
+.nav-btn.active {
+  background: #2f3136 !important;
+}
+
+/* ---------- PAGE HEADER ---------- */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  padding: 0 12px;
+  margin-top: 1rem;
+}
+
+.page-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+/* ---------- CONTEÚDO PRINCIPAL ---------- */
+.main-content {
+  padding: 16px;
+  margin-bottom: 76px;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+}
+
+/* Profile Card */
+.profile-card {
+  background: linear-gradient(135deg, var(--lm-3), var(--lm-2));
+  border: 1px solid var(--lm-4);
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-info-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profile-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+  word-break: break-all;
+}
+
+.profile-fins {
+  color: #ffd166;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0,0,0,0.2);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.profile-password {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+}
+
+.toggle-password {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+}
+
+.toggle-password:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* ---------- RESPONSIVIDADE ---------- */
+/* Tablet / telas médias */
+@media (min-width: 768px) {
+  .nav {
     position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #333333;
-    padding: 10px 10px;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.fixed-bottom-buttons button{
-    height: 5vh;
+    top: 0;
+    bottom: auto;
+    left: 0;
     width: 20vw;
-    font-size: 2vh;
+    min-width: 120px;
+    height: 100vh;
+    border-right: 2px solid #333;
+    border-top: none;
+    flex-direction: column;
+    padding: 12px 0;
+  }
+
+  .nav h1 {
+    display: block;
     text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 8px 12px 10px 12px;
+    line-height: 1.2;
+  }
+
+  .nav .profile {
+    display: flex;
+  }
+
+  .fixed-bottom-buttons {
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+  }
+
+  .nav-btn {
+    flex-direction: row;
+    gap: 10px;
+    height: 52px;
+    width: 100%;
+    padding: 0 18px;
+    border-radius: 0;
+    justify-content: flex-start;
+    font-size: 1rem;
+  }
+
+  .nav-btn i {
+    width: 26px;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .nav-btn .btn-text {
+    display: block;
+    font-size: 1rem;
+    flex: 1;
+    text-align: left;
+  }
+
+  .page-header {
+    gap: 15px;
+    margin-bottom: 2rem;
+    padding: 0 16px;
+    margin-top: 0;
+  }
+
+  .page-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .main-content {
+    margin-left: 20vw;
+    padding: 28px;
+    max-width: calc(100% - 20vw);
+    margin-bottom: 0;
+    min-height: 100vh;
+  }
+
+  .profile-card {
+    max-width: 500px;
+    gap: 24px;
+  }
 }
 
-/* Responsividade simples */
-@media (max-width: 480px) {
-    .container {
-        flex-direction: column;
-        height: auto;
-        width: 90vw;
-        margin-top: 15vh;
-    }
-    .container .card {
-        width: 100%;
-        height: auto;
-        margin: 0 0 15px 0;
-    }
-    .fixed-bottom-buttons {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px 0;
-    }
-    .fixed-bottom-buttons button {
-        width: 100%;
-        height: 6vh;
-        font-size: 2.5vh;
-    }
+/* Desktop */
+@media (min-width: 1024px) {
+  .nav {
+    width: 16.5vw;
+    min-width: 140px;
+  }
+
+  .main-content {
+    margin-left: 16.5vw;
+    max-width: calc(100% - 16.5vw);
+  }
+
+  .profile-card {
+    max-width: 500px;
+    padding: 32px;
+    gap: 28px;
+  }
+
+  .page-header {
+    gap: 18px;
+  }
+
+  .page-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+  }
 }
+

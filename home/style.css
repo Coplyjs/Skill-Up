@@ -30,7 +30,7 @@ body {
   z-index: 1000;
 }
 
-/* Título */
+/* Titulo */
 .nav-title {
   text-align: center;
   font-size: 1.2rem;
@@ -38,6 +38,7 @@ body {
   color: #fff;
   margin: 8px 12px 10px 12px;
   line-height: 1.2;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 /* Área de botões: ocupar o espaço do meio da nav */
@@ -93,6 +94,10 @@ body {
 /* Hover/ativo */
 .nav-btn:hover {
   background: #007bff !important;
+}
+
+.nav-btn.active {
+  background: #2f3136 !important;
 }
 
 /* Perfil fixado na base da nav */
@@ -257,6 +262,15 @@ body {
   .nav-title,
   .profile {
     display: none;
+  }
+
+  .page-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .page-title {
+    font-size: 2rem;
   }
 
   /* garantir que o conteúdo não fique atrás da barra inferior */
@@ -911,3 +925,47 @@ button.btn.btn-outline-danger.btn-remover-ex:active,
 }
 
 .createTask:active { transform: translateY(1px); }
+
+/* Page Header - Logo + Title */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 2rem;
+  padding: 0 16px;
+  gap: 30px;
+}
+
+.page-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  gap: 30px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+@media (max-width: 600px) {
+  .page-header {
+    gap: 12px;
+    margin-bottom: 1.5rem;
+    padding: 0 12px;
+    margin-top: 1rem;
+  }
+
+  .page-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+}

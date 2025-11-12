@@ -12,30 +12,74 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav class="navbar bg-light p-3">
-    <div class="container-fluid justify-content-between">
-      <h1 class="navbar-brand mb-0">Profile</h1>
-      <i class="fa-solid fa-circle-user" style="font-size: 48px; color: #333;"></i>
+  <nav class="nav">
+    <div class="nav-header">
+      <img src="/icons/images/SkillUp-logo.svg" alt="Logo" class="nav-logo" />
+      <h1 class="nav-title">Let's Skill UP!</h1>
     </div>
+
+    <div class="fixed-bottom-buttons">
+      <button type="button" class="nav-btn" onclick="window.location.href = '/diet/index.html'">
+        <i class="fa-solid fa-utensils"></i>
+        <span class="btn-text">Diet</span>
+      </button>
+
+      <button type="button" class="nav-btn" onclick="window.location.href = '/workout/index.html'">
+        <i class="fa-solid fa-dumbbell"></i>
+        <span class="btn-text">Workout</span>
+      </button>
+
+      <button type="button" class="nav-btn active" onclick="window.location.href = '/home/index.html'">
+        <i class="fa-solid fa-list-check"></i>
+        <span class="btn-text">List</span>
+      </button>
+
+      <button type="button" class="nav-btn" onclick="window.location.href = '/streak/index.html'">
+        <i class="fa-solid fa-fire"></i>
+        <span class="btn-text">Streak</span>
+      </button>
+
+      <button type="button" class="nav-btn" onclick="window.location.href = '/store/index.html'">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="btn-text">Store</span>
+      </button>
+    </div>
+
   </nav>
 
-  <div class="container mt-5">
-    <div class="card p-4 shadow-sm text-center">
-
-      <p><strong>Email:</strong> <span id="email">Loading...</span></p>
-      <p><strong>Password:</strong> <span id="password">Loading...</span></p>
-      <p><strong>Fins:</strong> <span id="fins">Loading...</span></p>
-    </div>
+  <div class="page-header">
+    <img src="/icons/images/SkillUp-logo.svg" alt="Logo" class="page-logo" />
+    <h1 class="page-title">Profile</h1>
   </div>
 
-<div class="fixed-bottom-buttons">
-  <button type="button" class="btn btn-primary" onclick="window.location.href = '/diet/index.html'"><i class="fa-solid fa-utensils" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-secondary" onclick="window.location.href = '/workout/index.html'"><i class="fa-solid fa-dumbbell" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-success" onclick="window.location.href = '/home/index.html'"><i class="fa-solid fa-list-check" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-danger" onclick="window.location.href = '/streak/index.html'"><i class="fa-solid fa-fire" style="color: #ffffff; font-size: 32px"></i></button>
-  <button type="button" class="btn btn-warning" onclick="window.location.href = '/store/index.html'"><i class="fa-solid fa-cart-shopping" style="color: #ffffff; font-size: 32px"></i></button>
-</div>
-
+  <div class="main-content">
+    <div class="profile-card">
+      <div class="profile-info-group">
+        <label>Name</label>
+        <p id="name" class="profile-value">Loading...</p>
+      </div>
+      
+      <div class="profile-info-group">
+        <label>Email</label>
+        <p id="email" class="profile-value">Loading...</p>
+      </div>
+      
+      <div class="profile-info-group">
+        <label>Fins</label>
+        <p id="fins" class="profile-value profile-fins">Loading...</p>
+      </div>
+      
+      <div class="profile-info-group">
+        <label>Password</label>
+        <div class="password-container">
+          <p id="password" class="profile-value profile-password">••••••••</p>
+          <button class="toggle-password" onclick="togglePassword()">
+            <i id="passwordIcon" class="fa-solid fa-eye"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <!-- LocalStorage Script-->
   <script src="/storage.js"></script>

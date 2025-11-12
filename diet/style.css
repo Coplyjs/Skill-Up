@@ -1,3 +1,10 @@
+:root {
+  --lm-1: #3C467B;
+  --lm-2: #50589C;
+  --lm-3: #636CCB;
+  --lm-4: #6E8CFB;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,61 +20,62 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------- NAV LATERAL ---------- */
+/* ---------- NAV LATERAL - Mobile First ---------- */
 .nav {
   position: fixed;
-  top: 0;
+  top: auto;
+  bottom: 0;
   left: 0;
-  width: 16.5vw;     
-  min-width: 140px;  
-  height: 100vh;
+  right: 0;
+  width: 100%;
+  height: 64px;
   background: #50589C;
-  border-right: 2px solid #333;
+  border-top: 2px solid #333;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 12px 0;    
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 8px;
   z-index: 1000;
 }
 
 /* Título */
 .nav-title {
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 8px 12px 10px 12px;
-  line-height: 1.2;
+  display: none;
+}
+
+.nav-header {
+  display: none;
 }
 
 .fixed-bottom-buttons {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;  
-  margin: 6px 0;
-  gap: 0;              
-  flex: 1;         
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  gap: 6px;
+  flex: 1;
 }
-
 
 .nav-btn {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  width: 100%;
-  height: 52px;           
-  padding: 0 18px;           
-  background: #2f3136 !important; 
+  gap: 4px;
+  width: auto;
+  height: 100%;
+  padding: 0;
+  justify-content: center;
+  flex: 1;
+  background: #2f3136 !important;
   color: #fff !important;
   border: none !important;
-  border-radius: 0;        
-  text-align: left;
-  font-size: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.7rem;
   cursor: pointer;
   transition: background 0.15s ease;
   box-shadow: none;
 }
-
 
 .nav-btn.btn,
 .nav-btn:focus,
@@ -77,22 +85,30 @@ body {
 }
 
 .nav-btn i {
-  font-size: 20px;
-  width: 26px; 
+  font-size: 18px;
+  width: auto;
   text-align: center;
   color: #fff;
 }
 
 .nav-btn .btn-text {
+  display: block;
   flex: 1;
-  text-align: left;
+  text-align: center;
+  font-size: 0.7rem;
+  line-height: 1;
 }
 
 .nav-btn:hover {
   background: #007bff !important;
 }
 
+.nav-btn.active {
+  background: #007bff !important;
+}
+
 .profile {
+  display: none;
   height: 64px;
   background: #222;
   color: #fff;
@@ -111,20 +127,78 @@ body {
   font-size: 28px;
 }
 
+/* ---------- PAGE HEADER ---------- */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  padding: 0 12px;
+  margin-top: 1rem;
+}
+
+.page-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
 /* ---------- CONTEÚDO PRINCIPAL ---------- */
 .main-content {
-  margin-left: 16.5vw;  
-  padding: 28px;
-  max-width: calc(100% - 16.5vw - 40px);
+  padding: 16px;
+  margin-bottom: 76px;
+  max-width: 100%;
 }
 
 .card {
-  border-radius: 10px;
-  background: #fff;
-  color: #000;
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 15px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--lm-3), var(--lm-2));
+  color: #fff;
+  border: 1px solid var(--lm-4);
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+  background: linear-gradient(135deg, var(--lm-4), var(--lm-3));
+}
+
+.card .name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.card .description {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  margin: 0;
+}
+
+.card .fins {
+  font-size: 0.9rem;
+  color: #ffd166;
+  font-weight: 700;
+  margin: 0;
 }
 
 /* Total geral */
@@ -138,148 +212,13 @@ body {
 
 .total-geral.mt-4{
   border: 1px solid white !important;
-}
-h4{
-  font-size: 16px;
-}
-
-/* ---------- RESPONSIVIDADE ---------- */
-/* Tablet / telas médias: reduzir largura da nav e esconder textos longos */
-@media (max-width: 1024px) {
-  .nav { width: 20vw; min-width: 120px; }
-  .main-content { margin-left: 20vw; }
-}
-
-/* Nav mais compacta (ícones) para telas estreitas */
-@media (max-width: 900px) {
-  .nav {
-    width: 68px;
-    min-width: 68px;
-    padding: 8px 0;
-  }
-
-  .nav-title,
-  .profile {
-    display: none;
-  }
-
-  .fixed-bottom-buttons {
-    gap: 6px;
-  }
-
-  .nav-btn {
-    height: 56px;
-    padding: 0;
-    justify-content: center;
-  }
-
-  .nav-btn i {
-    width: auto;
-    margin: 0;
-    font-size: 20px;
-  }
-
-  .nav-btn .btn-text {
-    display: none;
-  }
-
-  .main-content {
-    margin-left: 68px;
-    padding: 20px;
-    max-width: calc(100% - 68px - 40px);
-  }
-}
-
-/* Mobile: transformar nav em barra inferior com ícones (melhor usabilidade) */
-@media (max-width: 600px) {
-  .nav {
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    min-width: 100%;
-    height: 64px;
-    min-height: 64px;
-    border-right: none;
-    border-top: 2px solid #333;
-    flex-direction: row;
-    padding: 6px 8px;
-  }
-
-  .fixed-bottom-buttons {
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-    flex: 1;
-  }
-
-  .nav-btn {
-    height: 100%;
-    border-radius: 8px;
-    padding: 0;
-    justify-content: center;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 0.85rem;
-  }
-
-  .nav-btn i {
-    font-size: 18px;
-  }
-
-  .nav-btn .btn-text {
-    display: block;
-    font-size: 0.7rem;
-    line-height: 1;
-  }
-
-  .nav-title,
-  .profile {
-    display: none;
-  }
-
-  /* garantir que o conteúdo não fique atrás da barra inferior */
-  .main-content {
-    margin-left: 0;
-    padding: 16px;
-    margin-bottom: 76px; /* reserva espaço para a nav inferior */
-    max-width: 100%;
-  }
-}
-
-/* Ajustes de modal em telas pequenas */
-.modal-dialog {
-  max-width: 95%;
-  margin: 1.75rem auto;
-}
-
-.modal-title,
-.modal label {
-  color: #000 !important;
-}
-
-.nav-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  justify-content: center;
-}
-
-.nav-logo {
-  width: 70px;
-  height: 70px;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-.total-geral.mt-4{
   display: flex;
   align-items: center;
   background-color: #2f3136;
+}
+
+h4{
+  font-size: 16px;
 }
 
 #novaRefeicaoBtn{
@@ -296,10 +235,123 @@ h4{
   transition-delay: 30ms;
 }
 
-/* opcional: reduz o título/ícone em telas pequenas */
-@media (max-width: 900px) {
-  .nav-header { justify-content: center; }
-  .nav-logo { width: 32px; height: 32px; }
+/* ---------- RESPONSIVIDADE ---------- */
+/* Tablet / telas médias */
+@media (min-width: 768px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    bottom: auto;
+    left: 0;
+    width: 20vw;
+    min-width: 120px;
+    height: 100vh;
+    border-right: 2px solid #333;
+    border-top: none;
+    flex-direction: column;
+    padding: 12px 0;
+  }
+
+  .nav-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    justify-content: center;
+  }
+
+  .nav-title {
+    display: block;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 8px 12px 10px 12px;
+    line-height: 1.2;
+  }
+
+  .fixed-bottom-buttons {
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+  }
+
+  .nav-btn {
+    flex-direction: row;
+    gap: 10px;
+    height: 52px;
+    width: 100%;
+    padding: 0 18px;
+    border-radius: 0;
+    justify-content: flex-start;
+    font-size: 1rem;
+  }
+
+  .nav-btn i {
+    font-size: 20px;
+    width: 26px;
+    text-align: center;
+  }
+
+  .nav-btn .btn-text {
+    display: block;
+    font-size: 1rem;
+    flex: 1;
+    text-align: left;
+  }
+
+  .profile {
+    display: flex;
+  }
+
+  .page-header {
+    gap: 15px;
+    margin-bottom: 2rem;
+    padding: 0 16px;
+    margin-top: 0;
+  }
+
+  .page-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .main-content {
+    margin-left: 20vw;
+    padding: 28px;
+    max-width: calc(100% - 20vw);
+    margin-bottom: 0;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .nav {
+    width: 16.5vw;
+    min-width: 140px;
+  }
+
+  .main-content {
+    margin-left: 16.5vw;
+    max-width: calc(100% - 16.5vw);
+  }
+
+  .page-header {
+    gap: 18px;
+  }
+
+  .page-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+  }
 }
 
 :root {

@@ -1,135 +1,406 @@
+:root {
+  --lm-1: #3C467B;
+  --lm-2: #50589C;
+  --lm-3: #636CCB;
+  --lm-4: #6E8CFB;
+}
+
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Corpo */
 body {
-    align-items: center;
-    display: flex;
-    justify-content: center;
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: #3C467B;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
+/* ---------- NAV LATERAL ---------- */
 .nav {
-    height: 10vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    position: absolute;
-    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    border-bottom: 2px solid #333333;
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16.5vw;
+  min-width: 140px;
+  height: 100vh;
+  background: #50589C;
+  border-right: 2px solid #333;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 12px 0;
+  z-index: 1000;
 }
 
-.nav h1 {
-    margin: 0;
+/* Título */
+.nav-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 8px 12px 10px 12px;
+  line-height: 1.2;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
+/* Área de botões */
+.fixed-bottom-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 6px 0;
+  gap: 0;
+  flex: 1;
+}
+
+/* Botões longos, encostados uns nos outros */
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 52px;
+  padding: 0 18px;
+  background: #2f3136 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 0;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  box-shadow: none;
+}
+
+.nav-btn.btn,
+.nav-btn:focus,
+.nav-btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Ícone e texto */
+.nav-btn i {
+  font-size: 20px;
+  width: 26px;
+  text-align: center;
+  color: #fff;
+}
+
+.nav-btn .btn-text {
+  flex: 1;
+  text-align: left;
+}
+
+/* Hover/ativo */
+.nav-btn:hover {
+  background: #007bff !important;
+}
+
+.nav-btn.active {
+  background: #2f3136 !important;
+}
+
+/* Perfil fixado na base da nav */
 .profile {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
+  height: 64px;
+  background: #222;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  margin: 12px;
+  align-self: center;
+  width: calc(100% - 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
+.profile i {
+  font-size: 28px;
+}
+
+/* ---------- CONTEÚDO PRINCIPAL ---------- */
 .container {
-    margin-top: 12vh;
-    display: flex;
-    height: 80vh;
-    width: 90vw;
-    justify-content: center;
+  margin-left: 16.5vw;
+  padding: 28px;
+  max-width: calc(100% - 16.5vw - 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.container .card {
-    border-radius: 1rem;
-    height: 14rem;
-    width: 10rem;
-    padding: 5px;
-    color: white;
-    background-color: #333333; /* same as first */
-    margin-right: 5px;
+.card {
+  border-radius: 12px;
+  padding: 16px;
+  color: white;
+  background: linear-gradient(135deg, var(--lm-3), var(--lm-2));
+  border: 1px solid var(--lm-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card .name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.card .description {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.8);
+}
+
+.card .fins {
+  font-size: 1rem;
+  color: #ffd166;
+  font-weight: 700;
+}
+
+.card .buy {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff6b6b, #ff5252);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.card .buy:hover {
+  background: linear-gradient(135deg, #ff8787, #ff6b6b);
+  transform: scale(1.05);
+}
+
+.card .completeTask {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00c853, #009624);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  align-self: flex-start;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.card .completeTask:hover {
+  background: linear-gradient(135deg, #00e676, #00c853);
+  transform: scale(1.05);
+}
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  justify-content: center;
+}
+
+.nav-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* Page Header - Logo + Título */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  margin-left: 16.5vw;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.page-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+/* ---------- RESPONSIVIDADE ---------- */
+/* Tablet / telas médias: reduzir largura da nav e esconder textos longos */
+@media (max-width: 1024px) {
+  .nav { width: 20vw; min-width: 120px; }
+  .container { margin-left: 20vw; }
+}
+
+/* Nav mais compacta (ícones) para telas estreitas */
+@media (max-width: 900px) {
+  .nav {
+    width: 68px;
+    min-width: 68px;
+    padding: 8px 0;
+  }
+
+  .nav-title,
+  .profile {
+    display: none;
+  }
+
+  .fixed-bottom-buttons {
+    gap: 6px;
+  }
+
+  .nav-btn {
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .nav-btn i {
+    width: auto;
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .nav-btn .btn-text {
+    display: none;
+  }
+
+  .page-header {
+    margin-left: 68px;
+    padding: 12px;
+  }
+
+  .container {
+    margin-left: 68px;
+    padding: 20px;
+    max-width: calc(100% - 68px - 40px);
+  }
+}
+
+/* Mobile: transformar nav em barra inferior com ícones (melhor usabilidade) */
+@media (max-width: 600px) {
+  .nav {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 100%;
+    height: 64px;
+    min-height: 64px;
+    border-right: none;
+    border-top: 2px solid #333;
+    flex-direction: row;
+    padding: 6px 8px;
+  }
+
+  .fixed-bottom-buttons {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .nav-btn {
+    height: 100%;
+    border-radius: 8px;
+    padding: 0;
+    justify-content: center;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-}
+    gap: 4px;
+    font-size: 0.85rem;
+  }
 
-.container .card .name {
-    font-size: 1.2rem;
-    font-weight: 600;
-}
+  .nav-btn i {
+    font-size: 18px;
+  }
 
-.container .card .description {
-    font-size: 1rem;
-    margin-top: 0.3rem;
-}
-
-.container .card .fins {
-    font-size: 1rem;
-    color: lightskyblue;
-}
-
-.container .card .completeTask {
-    font-size: 1rem;
-    height: 2rem;
-    width: 8rem;
-    margin: 0 auto 5px auto;
+  .nav-btn .btn-text {
     display: block;
-    border: none;
-    border-radius: 10px;
-    background-color: rgb(0, 150, 0);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+
+  .nav-title,
+  .profile {
+    display: none;
+  }
+
+  .page-header {
+    margin-left: 0;
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+
+  .page-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .container {
+    margin-left: 0;
+    padding: 16px;
+    margin-bottom: 76px;
+    max-width: 100%;
+  }
+
+  .card {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: auto;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .card .name {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .card .description {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .card .buy {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    align-self: stretch;
+  }
+
+  .card .completeTask {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    align-self: stretch;
+  }
 }
 
-.container .card .completeTask:hover {
-    background-color: rgb(0, 180, 0);
-}
-
-.fixed-bottom-buttons {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #333333;
-    padding: 10px 10px;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.fixed-bottom-buttons button{
-    height: 5vh;
-    width: 20vw;
-    font-size: 2vh;
-    text-align: center;
-}
-
-/* Responsividade simples */
-@media (max-width: 480px) {
-    .container {
-        flex-direction: column;
-        height: auto;
-        width: 90vw;
-        margin-top: 15vh;
-    }
-    .container .card {
-        width: 100%;
-        height: auto;
-        margin: 0 0 15px 0;
-    }
-    .fixed-bottom-buttons {
-        flex-direction: column;
-        gap: 10px;
-        padding: 15px 0;
-    }
-    .fixed-bottom-buttons button {
-        width: 100%;
-        height: 6vh;
-        font-size: 2.5vh;
-    }
+/* opcional: reduz o título/ícone em telas pequenas */
+@media (max-width: 900px) {
+  .nav-header { justify-content: center; }
+  .nav-logo { width: 32px; height: 32px; }
 }

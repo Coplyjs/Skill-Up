@@ -1,3 +1,10 @@
+:root {
+  --lm-1: #3C467B;
+  --lm-2: #50589C;
+  --lm-3: #636CCB;
+  --lm-4: #6E8CFB;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,63 +20,63 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------- NAV LATERAL ---------- */
+/* ---------- NAV LATERAL - Mobile First ---------- */
 .nav {
   position: fixed;
-  top: 0;
+  top: auto;
+  bottom: 0;
   left: 0;
-  width: 16.5vw;        /* navbar em vw, ajusta com viewport */
-  min-width: 140px;     /* garante largura mínima */
-  height: 100vh;
+  right: 0;
+  width: 100%;
+  height: 64px;
   background: #50589C;
-  border-right: 2px solid #333;
+  border-top: 2px solid #333;
   display: flex;
-  flex-direction: column;
-  align-items: stretch; /* importante: filhos ocupam largura total */
-  padding: 12px 0;      /* só topo e base */
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 8px;
   z-index: 1000;
 }
 
 /* Título */
 .nav-title {
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 8px 12px 10px 12px;
-  line-height: 1.2;
+  display: none;
 }
 
-/* Área de botões: ocupar o espaço do meio da nav */
+.nav-header {
+  display: none;
+}
+
 .fixed-bottom-buttons {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;  /* botões ocupam 100% da largura da nav */
-  margin: 6px 0;
-  gap: 0;                /* sem espaçamento entre botões */
-  flex: 1;               /* ocupa o espaço disponível, empurra profile para baixo */
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  gap: 6px;
+  flex: 1;
 }
 
-/* Botões longos, encostados uns nos outros */
 .nav-btn {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  width: 100%;
-  height: 52px;               /* "longos" na vertical — ajuste se quiser mais alto/baixo */
-  padding: 0 18px;            /* espaço interno */
-  background: #2f3136 !important; /* força cor (overrides Bootstrap) */
+  gap: 4px;
+  width: auto;
+  height: 100%;
+  padding: 0;
+  justify-content: center;
+  flex: 1;
+  background: #2f3136 !important;
   color: #fff !important;
   border: none !important;
-  border-radius: 0;           /* sem arredondamento: ficam colados */
-  text-align: left;
-  font-size: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.7rem;
   cursor: pointer;
   transition: background 0.15s ease;
   box-shadow: none;
 }
 
-/* Remover qualquer margem que botoes do bootstrap tenham */
 .nav-btn.btn,
 .nav-btn:focus,
 .nav-btn:active {
@@ -77,224 +84,188 @@ body {
   box-shadow: none;
 }
 
-/* Ícone e texto: organizar visualmente */
 .nav-btn i {
-  font-size: 20px;
-  width: 26px;   /* largura fixa para alinhar texto */
+  font-size: 18px;
+  width: auto;
   text-align: center;
   color: #fff;
 }
 
 .nav-btn .btn-text {
+  display: block;
   flex: 1;
-  text-align: left;
+  text-align: center;
+  font-size: 0.7rem;
+  line-height: 1;
 }
 
-/* Hover/ativo */
 .nav-btn:hover {
   background: #007bff !important;
 }
 
-/* Perfil fixado na base da nav */
+.nav-btn.active {
+  background: #2f3136 !important;
+}
+
 .profile {
+  display: none;
   height: 64px;
   background: #222;
   color: #fff;
   border: 2px solid rgba(255,255,255,0.12);
   border-radius: 8px;
-  margin: 12px;
-  align-self: center;
-  width: calc(100% - 24px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
 }
 
 .profile i {
   font-size: 28px;
 }
 
-/* ---------- CONTEÚDO PRINCIPAL ---------- */
-.main-content {
-  margin-left: 16.5vw;  
-  padding: 28px;
-  max-width: calc(100% - 16.5vw - 40px);
-}
-
-.card {
-  border-radius: 10px;
-  background: #fff;
-  color: #000;
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-bottom: 15px;
-}
-
-/* Total geral */
-.total-geral {
-  background: #007bff;
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
-  display: inline-block;
-}
-
-.alert.alert-info{
-  background-color: #2f3136 !important;
-  border-color: white;
-  color: white;
-}
-
-/* ---------- RESPONSIVIDADE ---------- */
-/* Tablet / telas médias: reduzir largura da nav e esconder textos longos */
-@media (max-width: 1024px) {
-  .nav { width: 20vw; min-width: 120px; }
-  .main-content { margin-left: 20vw; }
-}
-
-/* Nav mais compacta (ícones) para telas estreitas */
-@media (max-width: 900px) {
-  .nav {
-    width: 68px;
-    min-width: 68px;
-    padding: 8px 0;
-  }
-
-  .nav-title,
-  .profile {
-    display: none;
-  }
-
-  .fixed-bottom-buttons {
-    gap: 6px;
-  }
-
-  .nav-btn {
-    height: 56px;
-    padding: 0;
-    justify-content: center;
-  }
-
-  .nav-btn i {
-    width: auto;
-    margin: 0;
-    font-size: 20px;
-  }
-
-  .nav-btn .btn-text {
-    display: none;
-  }
-
-  .main-content {
-    margin-left: 68px;
-    padding: 20px;
-    max-width: calc(100% - 68px - 40px);
-  }
-}
-
-/* Mobile: transformar nav em barra inferior com ícones (melhor usabilidade) */
-@media (max-width: 400px) {
-  .nav {
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    min-width: 100%;
-    height: 64px;
-    min-height: 64px;
-    border-right: none;
-    border-top: 2px solid #333;
-    flex-direction: row;
-    padding: 6px 8px;
-  }
-
-  .fixed-bottom-buttons {
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-    flex: 1;
-  }
-
-  .nav-btn {
-    height: 100%;
-    border-radius: 8px;
-    padding: 0;
-    justify-content: center;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 0.85rem;
-  }
-
-  .nav-btn i {
-    font-size: 18px;
-  }
-
-  .nav-btn .btn-text {
-    display: block;
-    font-size: 0.7rem;
-    line-height: 1;
-  }
-
-  .nav-title,
-  .profile {
-    display: none;
-  }
-
-  /* garantir que o conteúdo não fique atrás da barra inferior */
-  .main-content {
-    margin-left: 0;
-    padding: 16px;
-    margin-bottom: 76px; /* reserva espaço para a nav inferior */
-    max-width: 100%;
-  }
-}
-
-/* Ajustes de modal em telas pequenas */
-.modal-dialog {
-  max-width: 95%;
-  margin: 1.75rem auto;
-}
-
-.modal-title,
-.modal label {
-  color: #000 !important;
-}
-
-.nav-header {
+/* ---------- PAGE HEADER ---------- */
+.page-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  padding: 0 12px;
+  margin-top: 1rem;
 }
 
-.nav-logo {
+.page-logo {
   width: 70px;
   height: 70px;
-  border-radius: 6px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
-/* opcional: reduz o título/ícone em telas pequenas */
-@media (max-width: 900px) {
-  .nav-header { justify-content: center; }
-  .nav-logo { width: 32px; height: 32px; }
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
-:root {
-  --lm-1: #3C467B; /* azul escuro */
-  --lm-2: #50589C; /* azul meio escuro */
-  --lm-3: #636CCB; /* azul meio claro */
-  --lm-4: #6E8CFB; /* azul claro */
+/* ---------- CONTEÚDO PRINCIPAL ---------- */
+.main-content {
+  padding: 16px;
+  margin-bottom: 76px;
+  max-width: 100%;
 }
 
-/* Paleta aplicada ao modal */
+.card {
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--lm-3), var(--lm-2));
+  color: #fff;
+  border: 1px solid var(--lm-4);
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+  background: linear-gradient(135deg, var(--lm-4), var(--lm-3));
+}
+
+.card .name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.card .description {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  margin: 0;
+}
+
+.card .fins {
+  font-size: 0.9rem;
+  color: #ffd166;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Card body and title styling */
+.card-body {
+  padding: 0;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px 0;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+/* List group styling */
+.list-group {
+  border: none;
+  background: transparent;
+}
+
+.list-group-item {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  font-family: 'Josefin Sans', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.list-group-item strong {
+  color: #ffd166;
+  font-weight: 700;
+}
+
+.list-group-item small {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Button styling */
+.btn-outline-danger {
+  color: #ff6b6b !important;
+  border-color: #ff6b6b !important;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.btn-outline-danger:hover {
+  background: #ff6b6b !important;
+  color: #fff !important;
+}
+
+#novoTreinoBtn{
+  background-color: #2f3136 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+  border-width: 0.3vh !important;
+}
+
+#novoTreinoBtn:hover{
+  background-color: #FFF !important;
+  border-color: #FFF !important;
+  color: #2f3136 !important;
+  transition-delay: 30ms;
+}
+
+/* Modal styling */
 .modal-content {
-  /* sem gradiente: cor sólida da paleta */
   background: var(--lm-2);
   color: #fff;
   border: 1px solid var(--lm-3);
@@ -303,20 +274,20 @@ body {
 
 .modal-header,
 .modal-footer {
-  /* sem gradiente: cor sólida */
   background: var(--lm-3);
   border-bottom: 1px solid var(--lm-4);
   border-top: 1px solid var(--lm-4);
 }
 
-.modal-title { color: #fff !important; }
+.modal-title { 
+  color: #fff !important; 
+}
 
 .modal label,
 .modal .form-label {
   color: #fff !important;
 }
 
-/* Inputs do modal: cor sólida */
 .modal .form-control,
 .modal input,
 .modal textarea {
@@ -325,7 +296,10 @@ body {
   border: 1px solid var(--lm-3);
 }
 
-/* Botões dentro do modal: sem gradiente */
+.modal .form-control::placeholder {
+  color: rgba(255,255,255,0.85);
+}
+
 .modal .btn-outline-primary {
   color: #fff;
   border-color: var(--lm-3);
@@ -344,26 +318,14 @@ body {
   color: #fff;
 }
 
-.modal .form-control {
-  background: var(--lm-2);
-  color: #fff;
-  border: 1px solid var(--lm-3);
-}
-
-/* Placeholder branco levemente opaco dentro do modal */
-.modal .form-control::placeholder {
-  color: rgba(255,255,255,0.85);
-}
-
-.modal .form-control {
-  background: var(--lm-2);
-  color: #fff;
-  border: 1px solid var(--lm-3);
-}
-
-/* Placeholder branco levemente opaco dentro do modal */
-.modal .form-control::placeholder {
-  color: rgba(255,255,255,0.85);
+.btn-close {
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #aaa;
+  display: flex;
+  align-items: center;
 }
 
 button.btn.btn-outline-danger.btn-remover-ex,
@@ -379,8 +341,8 @@ button.btn.btn-outline-danger.btn-remover-ex:hover,
 button.btn.btn-outline-danger.btn-remover-ex:focus,
 .btn-remover-ex:hover,
 .btn-remover-ex:focus {
-  background: #dc3545 !important; /* fundo vermelho no hover */
-  color: #fff !important;         /* texto branco no hover */
+  background: #dc3545 !important;
+  color: #fff !important;
   border-color: #b02a37 !important;
 }
 
@@ -391,16 +353,121 @@ button.btn.btn-outline-danger.btn-remover-ex:active,
   color: #fff !important;
 }
 
-#novoTreinoBtn{
-  background-color: #2f3136 !important;
-  border-color: #ffffff !important;
-  color: #ffffff !important;
-  border-width: 0.3vh !important;
+/* ---------- RESPONSIVIDADE ---------- */
+/* Tablet / telas médias */
+@media (min-width: 768px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    bottom: auto;
+    left: 0;
+    width: 20vw;
+    min-width: 120px;
+    height: 100vh;
+    border-right: 2px solid #333;
+    border-top: none;
+    flex-direction: column;
+    padding: 12px 0;
+  }
+
+  .nav-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    justify-content: center;
+  }
+
+  .nav-title {
+    display: block;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 8px 12px 10px 12px;
+    line-height: 1.2;
+  }
+
+  .fixed-bottom-buttons {
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+  }
+
+  .nav-btn {
+    flex-direction: row;
+    gap: 10px;
+    height: 52px;
+    width: 100%;
+    padding: 0 18px;
+    border-radius: 0;
+    justify-content: flex-start;
+    font-size: 1rem;
+  }
+
+  .nav-btn i {
+    font-size: 20px;
+    width: 26px;
+    text-align: center;
+  }
+
+  .nav-btn .btn-text {
+    display: block;
+    font-size: 1rem;
+    flex: 1;
+    text-align: left;
+  }
+
+  .profile {
+    display: flex;
+  }
+
+  .page-header {
+    gap: 15px;
+    margin-bottom: 2rem;
+    padding: 0 16px;
+    margin-top: 0;
+  }
+
+  .page-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .main-content {
+    margin-left: 20vw;
+    padding: 28px;
+    max-width: calc(100% - 20vw);
+    margin-bottom: 0;
+  }
 }
 
-#novoTreinoBtn:hover{
-  background-color: #FFF !important;
-  border-color: #FFF !important;
-  color: #2f3136 !important;
-  transition-delay: 30ms;
+/* Desktop */
+@media (min-width: 1024px) {
+  .nav {
+    width: 16.5vw;
+    min-width: 140px;
+  }
+
+  .main-content {
+    margin-left: 16.5vw;
+    max-width: calc(100% - 16.5vw);
+  }
+
+  .page-header {
+    gap: 18px;
+  }
+
+  .page-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+  }
 }
