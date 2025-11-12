@@ -23,6 +23,15 @@ function loadData() {
   }
 }
 
+function getLoggedUser() {
+  const data = JSON.parse(localStorage.getItem('loggedUser'));
+
+  if(data !== null){
+    return data
+  }
+}
+
 // Make the functions available globally (so you can use them anywhere)
 window.saveData = saveData;
 window.loadData = loadData;
+window.getLoggedUser = getLoggedUser
