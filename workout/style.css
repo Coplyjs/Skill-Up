@@ -140,6 +140,12 @@ body {
   display: inline-block;
 }
 
+.alert.alert-info{
+  background-color: #2f3136 !important;
+  border-color: white;
+  color: white;
+}
+
 /* ---------- RESPONSIVIDADE ---------- */
 /* Tablet / telas médias: reduzir largura da nav e esconder textos longos */
 @media (max-width: 1024px) {
