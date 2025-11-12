@@ -194,7 +194,7 @@ body {
 }
 
 /* Mobile: transformar nav em barra inferior com ícones (melhor usabilidade) */
-@media (max-width: 600px) {
+@media (max-width: 400px) {
   .nav {
     top: auto;
     bottom: 0;

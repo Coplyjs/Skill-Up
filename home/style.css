@@ -140,6 +140,27 @@ body {
   display: inline-block;
 }
 
+.btn.btn-outline-danger.btn-sm{
+  font-weight: bolder;
+}
+
+.btn.btn-success.btn-sm{
+  background-color: transparent;
+  color: white;
+  border-color: white;
+  font-weight: bolder;
+}
+
+.btn.btn-success.btn-sm:hover{
+  background-color: #00723b;;
+  color: white;
+  border-color: #00723b;
+  font-weight: bolder;
+}
+
+.fins{
+  color: white !important;
+}
 /* ---------- RESPONSIVIDADE ---------- */
 /* Tablet / telas médias: reduzir largura da nav e esconder textos longos */
 @media (max-width: 1024px) {

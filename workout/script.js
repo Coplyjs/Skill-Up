@@ -1,4 +1,4 @@
-const API_KEY = "";
+const API_KEY = "4LaR3eumIcD1XhDBIIe9lA==DBTOTA9lW2ji4TBW";
 let treinos = [];
 const allMuscles = [
   "abdominals","abductors","adductors","biceps","calves","chest",
