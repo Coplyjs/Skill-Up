@@ -5,17 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Store</title>
 
-    <!-- Bootstrap CSS & Icons-->
+  <!-- Bootstrap CSS & Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- CSS-->
-  <link rel="stylesheet" href="style.css">
-
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <nav class="nav">
-
   <div class="fixed-bottom-buttons">
     <button type="button" class="nav-btn" onclick="window.location.href = '/diet/index.html'">
       <i class="fa-solid fa-utensils"></i>
@@ -47,7 +45,6 @@
       <span class="btn-text">Profile</span>
     </button>
   </div>
-
 </nav>
 
   <div class="page-header">
@@ -56,23 +53,36 @@
   </div>
 
   <div class="container">
-    <!-- Calories Card -->
+    <!-- CARD 1 -->
     <div class="card">
-      <div class="name">Calories</div>
-      <div class="description">Goal: <span id="calGoal">2000</span> kcal</div>
-      <div class="fins">Consumed: <span id="calConsumed">0</span> kcal</div>
-      <button class="completeTask" onclick="addCalories()">Edit</button>
+      <div class="name">Christmas</div>
+      <img src="/icons/christmas-icon/happy-icon-christmas.png" alt="Christmas" class="product-img">
+      <div class="fins">50 Fins</div>
+      <button class="buy" onclick="buyProduct('Christmas')">Comprar</button>
     </div>
 
-    <!-- Water Card -->
+    <!-- CARD 2 -->
     <div class="card">
-      <div class="name">Water</div>
-      <div class="description">Goal: <span id="waterGoal">2000</span> ml</div>
-      <div class="fins">Consumed: <span id="waterConsumed">0</span> ml</div>
-      <button class="completeTask" onclick="addWater()">Edit</button>
+      <div class="name">Pirates</div>
+      <img src="/icons/pirate-icons/happy-icon-pirate.png" alt="Pirates" class="product-img">
+      <div class="fins">50 Fins</div>
+      <button class="buy" onclick="buyProduct('Pirates')">Comprar</button>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card">
+      <div class="name">Halloween</div>
+      <img src="/icons/halloween-icons/happy-icon-halloween.png" alt="Halloween" class="product-img">
+      <div class="fins">50 Fins</div>
+      <button class="buy" onclick="buyProduct('Halloween')">Comprar</button>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    function buyProduct(productName) {
+      alert(`Você comprou: ${productName}!`);
+    }
+  </script>
+
 </body>
 </html>

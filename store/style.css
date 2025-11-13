@@ -243,6 +243,16 @@ body {
   font-family: 'Josefin Sans', sans-serif;
 }
 
+/* ---------- IMAGENS DOS PRODUTOS ---------- */
+.product-img {
+  width: 100%;
+  height: 180px;
+  object-fit: scale-down;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+
 /* ---------- RESPONSIVIDADE ---------- */
 /* Tablet / telas médias: reduzir largura da nav e esconder textos longos */
 @media (max-width: 1024px) {
