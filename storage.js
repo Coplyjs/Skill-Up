@@ -16,12 +16,20 @@ function saveData(value) {
 function loadData() {
   try {
     const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : null;
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      // Inicializa estrutura padrão
+      const defaultDB = { users: [] };
+      localStorage.setItem(key, JSON.stringify(defaultDB));
+      return defaultDB;
+    }
   } catch (error) {
     console.error('Error loading data:', error);
-    return null;
+    return { users: [] }; // fallback de segurança
   }
 }
+
 
 function getLoggedUser() {
   const data = JSON.parse(localStorage.getItem('loggedUser'));

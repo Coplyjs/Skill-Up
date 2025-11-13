@@ -14,9 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const db = loadData() || [];
+    const dbObj = loadData();    // { users: [...] }
+    const db = dbObj.users;      // array de usuários
 
-    const user = db.find(user => user.email === email && user.password === password);
+    const user = db.find(u => u.email === email && u.password === password);
 
     if (user) {
       localStorage.setItem("loggedUser", JSON.stringify(user));

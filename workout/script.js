@@ -1,4 +1,4 @@
-const API_KEY = "";
+const API_KEY = "4LaR3eumIcD1XhDBIIe9lA==DBTOTA9lW2ji4TBW";
 let treinos = [];
 const allMuscles = [
   "abdominals","abductors","adductors","biceps","calves","chest",
@@ -6,28 +6,22 @@ const allMuscles = [
   "neck","quadriceps","shoulders","triceps"
 ];
 
-// modalController oferece uma API uniforme (show/hide) que usa bootstrap se disponível
+// ---------- MODAL CONTROLLER ----------
 const modalController = {
   init(modalId) {
     this.modalId = modalId;
     this.el = document.getElementById(modalId);
     if (!this.el) return;
     if (typeof bootstrap !== "undefined" && bootstrap.Modal) {
-      try {
-        this.bsInstance = bootstrap.Modal.getOrCreateInstance(this.el);
-        this.useBootstrap = true;
-      } catch (e) {
-        this.useBootstrap = false;
-      }
+      try { this.bsInstance = bootstrap.Modal.getOrCreateInstance(this.el); this.useBootstrap = true; } 
+      catch { this.useBootstrap = false; }
     } else this.useBootstrap = false;
   },
   show() {
     if (!this.el) return;
     if (this.useBootstrap && this.bsInstance) this.bsInstance.show();
     else {
-      this.el.classList.add("show");
-      this.el.style.display = "block";
-      document.body.classList.add("modal-open");
+      this.el.classList.add("show"); this.el.style.display = "block"; document.body.classList.add("modal-open");
       if (!document.querySelector(".modal-backdrop-custom")) {
         const bd = document.createElement("div");
         bd.className = "modal-backdrop-custom";
@@ -40,11 +34,8 @@ const modalController = {
     if (!this.el) return;
     if (this.useBootstrap && this.bsInstance) this.bsInstance.hide();
     else {
-      this.el.classList.remove("show");
-      this.el.style.display = "none";
-      document.body.classList.remove("modal-open");
-      const bd = document.querySelector(".modal-backdrop-custom");
-      if (bd) bd.remove();
+      this.el.classList.remove("show"); this.el.style.display = "none"; document.body.classList.remove("modal-open");
+      const bd = document.querySelector(".modal-backdrop-custom"); if (bd) bd.remove();
     }
   }
 };
@@ -57,26 +48,18 @@ function qsel(selector, parent = document) { return parent.querySelector(selecto
 document.addEventListener("DOMContentLoaded", () => {
   modalController.init("treinoModal");
 
-  const novoBtn = qs("novoTreinoBtn");
-  const addExBtn = qs("addExercicioBtn");
-  const salvarBtn = qs("salvarTreinoBtn");
+  qs("novoTreinoBtn")?.addEventListener("click", abrirModal);
+  qs("addExercicioBtn")?.addEventListener("click", addCampoExercicio);
+  qs("salvarTreinoBtn")?.addEventListener("click", salvarTreino);
 
-  if (novoBtn) novoBtn.addEventListener("click", abrirModal);
-  if (addExBtn) addExBtn.addEventListener("click", addCampoExercicio);
-  if (salvarBtn) salvarBtn.addEventListener("click", salvarTreino);
-
-  carregarLocalStorage(); // ← Carrega treinos salvos
-  agendarResetDiario();   // ← Agenda reset automático
-
+  carregarTreinosUsuario(); // ← Carrega treinos salvos do usuário
   renderizarTreinos();
 });
 
 // ---------- MODAL / UI ----------
 function abrirModal() {
-  const nomeEl = qs("nomeTreino");
-  const lista = qs("exerciciosLista");
-  if (nomeEl) nomeEl.value = "";
-  if (lista) lista.innerHTML = "";
+  qs("nomeTreino").value = "";
+  qs("exerciciosLista").innerHTML = "";
   addCampoExercicio();
   modalController.show();
 }
@@ -122,7 +105,6 @@ function addCampoExercicio() {
       </div>
     </div>
   `;
-
   container.appendChild(div);
 
   const inputMusculo = div.querySelector(".exMusculo");
@@ -136,23 +118,19 @@ function addCampoExercicio() {
     listaMus.innerHTML = "";
     if (!q) { listaMus.style.display = "none"; return; }
     const filtrado = allMuscles.filter(m => m.startsWith(q));
-    if (filtrado.length === 0) { listaMus.style.display = "none"; return; }
     filtrado.forEach(m => {
       const item = document.createElement("button");
-      item.type = "button";
-      item.className = "list-group-item list-group-item-action";
-      item.textContent = m;
+      item.type = "button"; item.className = "list-group-item list-group-item-action"; item.textContent = m;
       item.addEventListener("click", () => {
-        inputMusculo.value = m;
-        listaMus.style.display = "none";
+        inputMusculo.value = m; listaMus.style.display = "none";
         buscarExerciciosPorMusculo(m, listaEx, inputExNome);
       });
       listaMus.appendChild(item);
     });
-    listaMus.style.display = "block";
+    listaMus.style.display = filtrado.length ? "block" : "none";
   });
 
-  listaEx.addEventListener("click", (e) => {
+  listaEx.addEventListener("click", e => {
     const btn = e.target.closest("button");
     if (!btn) return;
     inputExNome.value = btn.dataset.name || btn.textContent;
@@ -163,7 +141,7 @@ function addCampoExercicio() {
 }
 
 // ---------- API ----------
-async function buscarExerciciosPorMusculo(muscle, listaEx) {
+async function buscarExerciciosPorMusculo(muscle, listaEx, inputExNome) {
   if (!listaEx) return;
   listaEx.innerHTML = `<div class="list-group-item">Carregando...</div>`;
   listaEx.style.display = "block";
@@ -171,34 +149,23 @@ async function buscarExerciciosPorMusculo(muscle, listaEx) {
     const res = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${encodeURIComponent(muscle)}`, {
       headers: { "X-Api-Key": API_KEY }
     });
-    if (!res.ok) {
-      listaEx.innerHTML = `<div class="list-group-item text-danger">Erro (status ${res.status})</div>`;
-      return;
-    }
+    if (!res.ok) throw new Error(`Status ${res.status}`);
     const data = await res.json();
-    if (!data || data.length === 0) {
-      listaEx.innerHTML = `<div class="list-group-item">No workouts registered.</div>`;
-      return;
-    }
     listaEx.innerHTML = "";
-    data.slice(0, 12).forEach(ex => {
+    (data || []).slice(0, 12).forEach(ex => {
       const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "list-group-item list-group-item-action";
-      btn.textContent = ex.name;
-      btn.dataset.name = ex.name;
+      btn.type = "button"; btn.className = "list-group-item list-group-item-action";
+      btn.textContent = ex.name; btn.dataset.name = ex.name;
       listaEx.appendChild(btn);
     });
-  } catch (err) {
-    console.error(err);
+  } catch {
     listaEx.innerHTML = `<div class="list-group-item text-danger">Erro ao buscar exercícios</div>`;
   }
 }
 
 // ---------- SAVE / RENDER ----------
 function salvarTreino() {
-  const nomeEl = qs("nomeTreino");
-  const nome = nomeEl ? nomeEl.value.trim() : "";
+  const nome = qs("nomeTreino")?.value.trim();
   if (!nome) return alert("Digite o nome do treino!");
 
   const itens = document.querySelectorAll(".exercicio-item");
@@ -215,20 +182,17 @@ function salvarTreino() {
 
   if (!exercicios.length) return alert("Adicione pelo menos um exercício válido.");
 
-  const treino = { nome, exercicios, criadoEm: new Date().toISOString() };
-  treinos.push(treino);
+  treinos.push({ nome, exercicios, criadoEm: new Date().toISOString() });
   modalController.hide();
   renderizarTreinos();
-  salvarLocalStorage(); // ← salva no localStorage
+  salvarTreinosUsuario();
 }
 
 function renderizarTreinos() {
   const container = qs("treinosContainer");
-  if (!container) return;
   container.innerHTML = "";
-
   if (!treinos.length) {
-    container.innerHTML = `<div class="alert alert-info">No workouts registered.</div>`;
+    container.innerHTML = `<div class="alert alert-info">Nenhum treino registrado.</div>`;
     return;
   }
 
@@ -238,9 +202,7 @@ function renderizarTreinos() {
     card.innerHTML = `
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-start">
-          <div>
-            <h5 class="card-title mb-1">${t.nome}</h5>
-          </div>
+          <h5 class="card-title mb-1">${t.nome}</h5>
           <button class="btn btn-sm btn-outline-danger" onclick="removerTreino(${i})">
             <i class="fa-solid fa-trash"></i> Remover
           </button>
@@ -250,8 +212,7 @@ function renderizarTreinos() {
             <li class="list-group-item">
               <strong>${e.name}</strong> — ${e.sets}×${e.reps} ${e.weight ? `(${e.weight}kg)` : ""}
               <br><small class="text-muted">Muscle: ${e.muscle}</small>
-            </li>
-          `).join("")}
+            </li>`).join("")}
         </ul>
       </div>
     `;
@@ -263,47 +224,37 @@ function removerTreino(index) {
   if (!confirm("Deseja remover este treino?")) return;
   treinos.splice(index, 1);
   renderizarTreinos();
-  salvarLocalStorage();
+  salvarTreinosUsuario();
 }
 
-/* ---------------------- LOCALSTORAGE ---------------------- */
+function salvarTreinosUsuario() {
+  const user = getLoggedUser();
+  if (!user) return;
 
-function salvarLocalStorage() {
-  const dataAtual = new Date().toLocaleDateString();
-  localStorage.setItem("treinosData", JSON.stringify({
-    treinos,
-    data: dataAtual
-  }));
+  const dbObj = loadData(); // { users: [...] }
+  if (!dbObj || !Array.isArray(dbObj.users)) return;
+
+  const db = dbObj.users;
+  const userIndex = db.findIndex(u => u.email === user.email);
+  if (userIndex === -1) return;
+
+  db[userIndex].workouts = treinos;
+  saveData(dbObj);
+  console.log("💾 Treinos salvos no usuário:", db[userIndex]);
 }
 
-function carregarLocalStorage() {
-  const dataSalva = localStorage.getItem("treinosData");
-  if (!dataSalva) return;
-  const { treinos: salvos, data } = JSON.parse(dataSalva);
-  const hoje = new Date().toLocaleDateString();
-  if (data === hoje) {
-    treinos = salvos || [];
-    renderizarTreinos();
-  } else resetarDia();
-}
+function carregarTreinosUsuario() {
+  const user = getLoggedUser();
+  if (!user) return;
 
-/* ---------------------- RESET DIÁRIO ---------------------- */
+  const dbObj = loadData();
+  if (!dbObj || !Array.isArray(dbObj.users)) return;
 
-function resetarDia() {
-  treinos = [];
+  const db = dbObj.users;
+  const u = db.find(u => u.email === user.email);
+  if (!u) return;
+
+  treinos = u.workouts || [];
   renderizarTreinos();
-  salvarLocalStorage();
-  console.log("Treinos resetados automaticamente às 00h00.");
 }
 
-function agendarResetDiario() {
-  const agora = new Date();
-  const proxima = new Date(agora);
-  proxima.setHours(24, 0, 0, 0);
-  const tempo = proxima - agora;
-  setTimeout(() => {
-    resetarDia();
-    agendarResetDiario();
-  }, tempo);
-
-}

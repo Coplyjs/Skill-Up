@@ -166,46 +166,48 @@ function removerRefeicao(index) {
   }
 }
 
-/* ---------------------- SALVAR NO USUÁRIO ---------------------- */
-
-function salvarNoUsuario() {
-  const loggedUser = getLoggedUser();
-  if (!loggedUser) return;
-
-  const db = loadData();
-  if (!db || !db.users) return;
-
-  const userIndex = db.users.findIndex(u => u.email === loggedUser.email);
-  if (userIndex === -1) return;
-
-  db.users[userIndex].diet = refeicoes;
-  saveData(db);
-}
-
 /* ---------------------- CARREGAR DIETA ---------------------- */
 
 function carregarDietUsuario() {
   const loggedUser = getLoggedUser();
   if (!loggedUser) return;
 
-  const db = loadData();
-  if (!db || !db.users) return;
+  const dbObj = loadData(); // { users: [...] }
+  if (!dbObj || !Array.isArray(dbObj.users)) return;
 
-  const user = db.users.find(u => u.email === loggedUser.email);
+  const db = dbObj.users;
+  const user = db.find(u => u.email === loggedUser.email);
   if (!user) return;
 
   const hoje = new Date().toLocaleDateString();
 
-  // Filtra refeições do dia atual (remove as antigas)
+  // Filtra refeições do dia atual
   refeicoes = (user.diet || []).filter(r => r.data === hoje);
   totalGeral = refeicoes.reduce((acc, r) => acc + r.total, 0);
 
   // Atualiza DB removendo refeições antigas
   user.diet = refeicoes;
-  saveData(db);
+  saveData(dbObj);
 
   renderizarRefeicoes();
 }
+
+function salvarNoUsuario() {
+  const loggedUser = getLoggedUser();
+  if (!loggedUser) return;
+
+  const dbObj = loadData();
+  if (!dbObj || !Array.isArray(dbObj.users)) return;
+
+  const db = dbObj.users;
+  const userIndex = db.findIndex(u => u.email === loggedUser.email);
+  if (userIndex === -1) return;
+
+  db[userIndex].diet = refeicoes;
+  saveData(dbObj);
+}
+
+
 
 /* ---------------------- RESET DIÁRIO ---------------------- */
 

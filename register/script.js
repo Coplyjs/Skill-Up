@@ -1,4 +1,3 @@
-// Wait until the DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   const registerBtn = document.getElementById("registerBtn");
   const nameInput = document.getElementById("name");
@@ -9,13 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
   registerBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const name = nameInput.value;
+    const name = nameInput.value.trim();
     const email = emailInput.value.trim();
     const password = passwordInput.value;
     const verifyPassword = verifyPasswordInput.value;
-
-
-    let db = loadData() || [];
 
     if (!email || !password || !verifyPassword) {
       alert("Por favor, preencha todos os campos.");
@@ -27,6 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // ⚡ CORREÇÃO: loadData retorna objeto, não array
+    let dbObj = loadData();      // { users: [...] }
+    let db = dbObj.users;
+
     const userExists = db.some(user => user.email === email);
     if (userExists) {
       alert("Este email já está cadastrado!");
@@ -34,19 +34,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const newUser = {
-      name: name,
-      email: email,
-      password: password,
+      name,
+      email,
+      password,
       tasks: [],
       dailyTasks: [],
       fins: 0,
-      workout: [],
+      workouts: [],
       diet: [],
       createdAt: new Date().toISOString()
     };
 
     db.push(newUser);
-    saveData(db);
+    dbObj.users = db;
+    saveData(dbObj);
 
     window.location.href = "/login/index.html";
   });

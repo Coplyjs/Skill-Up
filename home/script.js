@@ -126,15 +126,17 @@ function saveUserData() {
   loggedUser.dailyTasks = dailyTasks;
   localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
 
-  const db = loadData() || [];
+  const dbObj = loadData(); // { users: [...] }
+  const db = dbObj.users;
+
   const idx = db.findIndex(u => u.email === loggedUser.email);
   if (idx !== -1) {
     db[idx] = loggedUser;
-    saveData(db);
   } else {
     db.push(loggedUser);
-    saveData(db);
   }
+
+  saveData(dbObj);
 }
 
 /**
