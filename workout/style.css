@@ -471,3 +471,21 @@ button.btn.btn-outline-danger.btn-remover-ex:active,
     font-size: 2.2rem;
   }
 }
+
+.alert.alert-info {
+  background-color: #2f3136 !important;
+  border: 0.3vh solid #ffffff !important;
+  color: #ffffff !important;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.alert.alert-info:hover {
+  background-color: #ffffff !important;
+  color: #2f3136 !important;
+}

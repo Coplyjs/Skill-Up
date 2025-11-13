@@ -177,7 +177,7 @@ async function buscarExerciciosPorMusculo(muscle, listaEx) {
     }
     const data = await res.json();
     if (!data || data.length === 0) {
-      listaEx.innerHTML = `<div class="list-group-item">Nenhum exercício encontrado</div>`;
+      listaEx.innerHTML = `<div class="list-group-item">No workouts registered.</div>`;
       return;
     }
     listaEx.innerHTML = "";
@@ -228,7 +228,7 @@ function renderizarTreinos() {
   container.innerHTML = "";
 
   if (!treinos.length) {
-    container.innerHTML = `<div class="alert alert-info">Nenhum treino cadastrado.</div>`;
+    container.innerHTML = `<div class="alert alert-info">No workouts registered.</div>`;
     return;
   }
 
