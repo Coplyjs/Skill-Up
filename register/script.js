@@ -1,6 +1,7 @@
 // Wait until the DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   const registerBtn = document.getElementById("registerBtn");
+  const nameInput = document.getElementById("name");
   const emailInput = document.getElementById("emailAdress");
   const passwordInput = document.getElementById("password");
   const verifyPasswordInput = document.getElementById("verifyPassword");
@@ -8,9 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
   registerBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
+    const name = nameInput.value;
     const email = emailInput.value.trim();
     const password = passwordInput.value;
     const verifyPassword = verifyPasswordInput.value;
+
 
     let db = loadData() || [];
 
@@ -31,11 +34,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const newUser = {
+      name: name,
       email: email,
       password: password,
       tasks: [],
       dailyTasks: [],
       fins: 0,
+      workout: [],
+      diet: [],
       createdAt: new Date().toISOString()
     };
 

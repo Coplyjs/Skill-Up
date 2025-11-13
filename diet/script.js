@@ -1,4 +1,4 @@
-const apiKey = "";
+const apiKey = "4ta7q3VUgJWJzNpU32dxDkVGhsasDbglvf6PRXBA";
 let refeicoes = [];
 let totalGeral = 0;
 let modal;
@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("addAlimentoBtn").addEventListener("click", addCampoAlimento);
   document.getElementById("salvarRefeicaoBtn").addEventListener("click", salvarRefeicao);
 
-  carregarLocalStorage(); 
-  agendarResetDiario();   
+  carregarDietUsuario();
+  agendarResetDiario();
 });
 
 function abrirModal() {
@@ -119,11 +119,18 @@ function salvarRefeicao() {
   if (!alimentos.length)
     return alert("Adicione pelo menos um alimento com calorias!");
 
-  refeicoes.push({ nome, alimentos, total: totalRefeicao });
+  const novaRefeicao = {
+    nome,
+    alimentos,
+    total: totalRefeicao,
+    data: new Date().toLocaleDateString()
+  };
+
+  refeicoes.push(novaRefeicao);
   totalGeral += totalRefeicao;
 
+  salvarNoUsuario(); // Salva dentro do usuário logado no DB
   renderizarRefeicoes();
-  salvarLocalStorage(); // salva no localStorage
   modal.hide();
 }
 
@@ -154,36 +161,50 @@ function removerRefeicao(index) {
   if (confirm("Deseja remover esta refeição?")) {
     totalGeral -= refeicoes[index].total;
     refeicoes.splice(index, 1);
+    salvarNoUsuario();
     renderizarRefeicoes();
-    salvarLocalStorage(); // salva alteração
   }
 }
 
-/* ---------------------- LOCALSTORAGE ---------------------- */
+/* ---------------------- SALVAR NO USUÁRIO ---------------------- */
 
-function salvarLocalStorage() {
-  const dataAtual = new Date().toLocaleDateString();
-  localStorage.setItem("refeicoesData", JSON.stringify({
-    refeicoes,
-    totalGeral,
-    data: dataAtual
-  }));
+function salvarNoUsuario() {
+  const loggedUser = getLoggedUser();
+  if (!loggedUser) return;
+
+  const db = loadData();
+  if (!db || !db.users) return;
+
+  const userIndex = db.users.findIndex(u => u.email === loggedUser.email);
+  if (userIndex === -1) return;
+
+  db.users[userIndex].diet = refeicoes;
+  saveData(db);
 }
 
-function carregarLocalStorage() {
-  const dataSalva = localStorage.getItem("refeicoesData");
-  if (!dataSalva) return;
+/* ---------------------- CARREGAR DIETA ---------------------- */
 
-  const { refeicoes: refeicoesSalvas, totalGeral: totalSalvo, data } = JSON.parse(dataSalva);
-  const dataHoje = new Date().toLocaleDateString();
+function carregarDietUsuario() {
+  const loggedUser = getLoggedUser();
+  if (!loggedUser) return;
 
-  if (data === dataHoje) {
-    refeicoes = refeicoesSalvas || [];
-    totalGeral = totalSalvo || 0;
-    renderizarRefeicoes();
-  } else {
-    resetarDia();
-  }
+  const db = loadData();
+  if (!db || !db.users) return;
+
+  const user = db.users.find(u => u.email === loggedUser.email);
+  if (!user) return;
+
+  const hoje = new Date().toLocaleDateString();
+
+  // Filtra refeições do dia atual (remove as antigas)
+  refeicoes = (user.diet || []).filter(r => r.data === hoje);
+  totalGeral = refeicoes.reduce((acc, r) => acc + r.total, 0);
+
+  // Atualiza DB removendo refeições antigas
+  user.diet = refeicoes;
+  saveData(db);
+
+  renderizarRefeicoes();
 }
 
 /* ---------------------- RESET DIÁRIO ---------------------- */
@@ -191,8 +212,8 @@ function carregarLocalStorage() {
 function resetarDia() {
   refeicoes = [];
   totalGeral = 0;
+  salvarNoUsuario();
   renderizarRefeicoes();
-  salvarLocalStorage();
   console.log("Reiniciado automaticamente às 00h00.");
 }
 
@@ -207,5 +228,4 @@ function agendarResetDiario() {
     resetarDia();
     agendarResetDiario(); // agenda o próximo reset
   }, tempoRestante);
-
 }
