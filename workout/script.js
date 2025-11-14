@@ -192,7 +192,7 @@ function renderizarTreinos() {
   const container = qs("treinosContainer");
   container.innerHTML = "";
   if (!treinos.length) {
-    container.innerHTML = `<div class="alert alert-info">Nenhum treino registrado.</div>`;
+    container.innerHTML = `<div class="alert alert-info">No registred workout.</div>`;
     return;
   }
 
