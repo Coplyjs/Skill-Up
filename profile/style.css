@@ -331,15 +331,28 @@ body {
 
 .gif-container {
   flex-shrink: 0;
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.mascotBTN {
+  display: flex;
+  height: 80px;
+  width: 90px;
+  border: none;
+  background-color: transparent;
+}
+
+.mascotBTN:disabled .mascot-gif {
+  opacity: 0.5;
 }
 
 .mascot-gif {
-  width: 150%;
-  height: 150%;
-  object-fit: contain;
+  object-fit: cover;
+  width: 90px;
+  height: 80px;
 }
