@@ -342,10 +342,12 @@ body {
 .mascotBTN {
   display: flex;
   height: 80px;
-  width: 90px;
+  width: 100px;
   border: none;
+  margin-left: 15px;
   background-color: transparent;
 }
+
 
 .mascotBTN:disabled .mascot-gif {
   opacity: 0.5;
@@ -353,6 +355,10 @@ body {
 
 .mascot-gif {
   object-fit: cover;
-  width: 90px;
+  width: 100px;
   height: 80px;
+}
+
+.mascot-gif:hover {
+  transform: scale(1.1)
 }

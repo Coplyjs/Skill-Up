@@ -39,3 +39,12 @@ function togglePassword() {
         icon.classList.add("fa-eye");
     }
 }
+
+function enable(id) {
+    for (let i = 1; i <= 4; i++) {
+        const btn = document.getElementById("btn" + i);
+        btn.disabled = true;      // enable all
+    }
+
+    document.getElementById("btn" + id).disabled = false;  // disable only clicked one
+}
