@@ -251,6 +251,13 @@ body {
   border: 1px solid rgba(255,255,255,0.2);
 }
 
+img.product-img{
+  height: 500px;
+  width: 500px;
+  justify-content: center;
+}
+
+
 
 /* ---------- RESPONSIVIDADE ---------- */
 /* Tablet / telas médias: reduzir largura da nav e esconder textos longos */
