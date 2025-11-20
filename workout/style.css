@@ -474,7 +474,7 @@ button.btn.btn-outline-danger.btn-remover-ex:active,
 
 .alert.alert-info {
   background-color: #2f3136 !important;
-  border: 0.3vh solid #ffffff !important;
+  border: 1px solid #ffffff !important;
   color: #ffffff !important;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
@@ -483,9 +483,6 @@ button.btn.btn-outline-danger.btn-remover-ex:active,
   text-align: center;
   margin-top: 10px;
   transition: all 0.2s ease;
-}
-
-.alert.alert-info:hover {
-  background-color: #ffffff !important;
-  color: #2f3136 !important;
+  height: 47.2px;
+  width: 368px;
 }

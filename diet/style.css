@@ -203,22 +203,33 @@ body {
 
 /* Total geral */
 .total-geral {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #007bff;
   color: white;
   padding: 10px;
   border-radius: 8px;
   display: inline-block;
+  text-align: center !important;
 }
 
 .total-geral.mt-4{
+  height: 47.2px;
+  width: 368px;
   border: 1px solid white !important;
   display: flex;
   align-items: center;
   background-color: #2f3136;
+  margin: 10px 0px 16px !important;
+  padding: 10px 16px;
 }
 
 h4{
   font-size: 16px;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }
 
 #novaRefeicaoBtn{
@@ -226,6 +237,8 @@ h4{
   border-color: #ffffff !important;
   color: #ffffff !important;
   border-width: 0.3vh !important;
+  height: 39.2px;
+  width: 143.91px;
 }
 
 #novaRefeicaoBtn:hover{
