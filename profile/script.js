@@ -1,5 +1,13 @@
 let currentUser = null;
 
+// Mapear botões para skins
+const skinMap = {
+  1: "default",
+  2: "Halloween",
+  3: "Pirates",
+  4: "Christmas"
+};
+
 // ✅ Quando a página carregar
 window.onload = () => {
     currentUser = getLoggedUser();
@@ -9,8 +17,19 @@ window.onload = () => {
         document.getElementById('email').textContent = currentUser.email || 'N/A';
         document.getElementById('fins').textContent = currentUser.fins || '0';
 
+        // Inicializar skins se não existirem (compatibilidade com usuários antigos)
+        if (!currentUser.skins) {
+          currentUser.skins = ["default"];
+        }
+        if (!currentUser.selectedSkin) {
+          currentUser.selectedSkin = "default";
+        }
+
         // Sempre ocultar senha inicialmente
         document.getElementById('password').textContent = "••••••••";
+
+        // Renderizar estado das skins
+        renderSkinsState();
     } else {
         document.getElementById('name').textContent = 'No user logged in';
         document.getElementById('password').textContent = '-';
@@ -40,11 +59,69 @@ function togglePassword() {
     }
 }
 
-function enable(id) {
-    for (let i = 1; i <= 4; i++) {
-        const btn = document.getElementById("btn" + i);
-        btn.disabled = true;      // enable all
+function renderSkinsState() {
+    // Renderizar estado de cada botão (disabled/enabled baseado em skins compradas)
+    Object.keys(skinMap).forEach(btnId => {
+        const skinId = skinMap[btnId];
+        const button = document.getElementById(`btn${btnId}`);
+        if (!button) return;
+
+        const hasSkin = currentUser.skins.includes(skinId);
+        const isSelected = currentUser.selectedSkin === skinId;
+
+        // Habilitar/desabilitar botão
+        if (hasSkin) {
+            button.disabled = false;
+            button.classList.remove("locked");
+            
+            // Destacar se selecionado
+            if (isSelected) {
+                button.classList.add("selected");
+            } else {
+                button.classList.remove("selected");
+            }
+        } else {
+            button.disabled = true;
+            button.classList.add("locked");
+            button.classList.remove("selected");
+        }
+    });
+}
+
+function selectSkin(skinId) {
+    // Verificar se o usuário possui a skin
+    if (!currentUser.skins || !currentUser.skins.includes(skinId)) {
+        alert(`❌ Você ainda não comprou a skin ${skinId}! Compre no Store.`);
+        return;
     }
 
-    document.getElementById("btn" + id).disabled = false;  // disable only clicked one
+    // Atualizar skin selecionada
+    currentUser.selectedSkin = skinId;
+    saveUserData();
+    renderSkinsState();
+
+    // Disparar evento customizado para o home
+    window.dispatchEvent(new CustomEvent('skinChanged', { detail: { skinId: skinId } }));
+
+    alert(`✅ Você selecionou a skin ${skinId}!`);
+}
+
+function saveUserData() {
+    if (!currentUser) return;
+
+    // Salvar no localStorage (sessão)
+    localStorage.setItem("loggedUser", JSON.stringify(currentUser));
+
+    // Salvar no banco de dados (storage)
+    const dbObj = loadData(); // { users: [...] }
+    const db = dbObj.users;
+
+    const idx = db.findIndex(u => u.email === currentUser.email);
+    if (idx !== -1) {
+        db[idx] = currentUser;
+    } else {
+        db.push(currentUser);
+    }
+
+    saveData(dbObj);
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta cha  <div class="main-content">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Profile</title>
 
@@ -57,12 +57,12 @@
       <div class="profile-info-group">
         <label>Customize profile</label>
           <div class="gif-container">
-            <button class="mascotBTN" id="btn1"><img id="mascot1" onclick="enable(1)" src="/icons/base-icons/Sig_feliz.gif" alt="Mascot" class="mascot-gif" /></button>
-            <button class="mascotBTN" id="btn2"><img id="mascot2" onclick="enable(2)" src="/icons/base-icons/Sig_feliz.gif" alt="Mascot" class="mascot-gif" /></button>
-            <button class="mascotBTN" id="btn3"><img id="mascot3" onclick="enable(3)" src="/icons/base-icons/Sig_feliz.gif" alt="Mascot" class="mascot-gif" /></button>
-            <button class="mascotBTN" id="btn4"><img id="mascot4" onclick="enable(4)" src="/icons/base-icons/Sig_feliz.gif" alt="Mascot" class="mascot-gif" /></button>
+            <button class="mascotBTN" id="btn1" onclick="selectSkin('default')"><img id="mascot1" src="/icons/base-icons/Sig_feliz.gif" alt="Mascot" class="mascot-gif" /><span class="skin-label">Default</span></button>
+            <button class="mascotBTN" id="btn2" onclick="selectSkin('Halloween')"><img id="mascot2" src="/icons/halloween-icons/happy-icon-halloween.png" alt="Mascot" class="mascot-gif" /><span class="skin-label">Halloween</span></button>
+            <button class="mascotBTN" id="btn3" onclick="selectSkin('Pirates')"><img id="mascot3" src="/icons/pirate-icons/happy-icon-pirate.png" alt="Mascot" class="mascot-gif" /><span class="skin-label">Pirates</span></button>
+            <button class="mascotBTN" id="btn4" onclick="selectSkin('Christmas')"><img id="mascot4" src="/icons/christmas-icon/happy-icon-christmas.png" alt="Mascot" class="mascot-gif" /><span class="skin-label">Christmas</span></button>
           </div>
-      
+      </div>
 
       <div class="profile-info-group">
         <label>Name</label>

@@ -2,6 +2,15 @@ let tasks = [];
 let dailyTasks = [];
 let taskModal;
 let loggedUser = null;
+let lastSkinLoaded = null;
+
+// Mapa de skins com seus GIFs/PNGs
+const skinGifs = {
+  "default": "/icons/base-icons/happy-icon.png",
+  "Christmas": "/icons/christmas-icon/happy-icon-christmas.png",
+  "Pirates": "/icons/pirate-icons/happy-icon-pirate.png",
+  "Halloween": "/icons/halloween-icons/happy-icon-halloween.png"
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   const modalElement = document.getElementById("taskModal");
@@ -19,10 +28,66 @@ document.addEventListener("DOMContentLoaded", () => {
   tasks = loggedUser.tasks || [];
   dailyTasks = loggedUser.dailyTasks || [];
 
+  // Inicializar skins se não existirem (compatibilidade com usuários antigos)
+  if (!loggedUser.skins) {
+    loggedUser.skins = ["default"];
+  }
+  if (!loggedUser.selectedSkin) {
+    loggedUser.selectedSkin = "default";
+  }
+
+  // Carregar skin selecionada
+  loadSelectedSkin();
+
   renderTasks();
   resetTasksIfNeeded();
   setInterval(resetTasksIfNeeded, 60000); // check every minute
+  
+  // Verificar mudança de skin a cada 500ms
+  setInterval(checkSkinUpdate, 500);
+
+  // Ouvir mudanças no localStorage
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'loggedUser') {
+      loggedUser = JSON.parse(event.newValue);
+      loadSelectedSkin();
+    }
+  });
+
+  // Ouvir evento customizado do profile
+  window.addEventListener('skinChanged', (event) => {
+    loadSelectedSkin();
+  });
 });
+
+function loadSelectedSkin() {
+  const mascotGif = document.getElementById("mascotGif");
+  if (!mascotGif) return;
+
+  // Recarregar dados do usuário do localStorage
+  const userData = localStorage.getItem("loggedUser");
+  if (userData) {
+    loggedUser = JSON.parse(userData);
+  }
+
+  const selectedSkin = loggedUser.selectedSkin || "default";
+  const gifPath = skinGifs[selectedSkin] || skinGifs["default"];
+  
+  // Forçar refresh da imagem adicionando timestamp
+  mascotGif.src = gifPath + "?t=" + Date.now();
+  lastSkinLoaded = selectedSkin;
+}
+
+function checkSkinUpdate() {
+  const userData = localStorage.getItem("loggedUser");
+  if (!userData) return;
+
+  const updatedUser = JSON.parse(userData);
+  if (updatedUser.selectedSkin !== lastSkinLoaded) {
+    loggedUser = updatedUser;
+    loadSelectedSkin();
+  }
+}
 
 function openTaskModal() {
   document.getElementById("taskName").value = "";

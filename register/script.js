@@ -42,6 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
       fins: 0,
       workouts: [],
       diet: [],
+      skins: ["default"],
+      selectedSkin: "default",
       createdAt: new Date().toISOString()
     };
 
