@@ -4,7 +4,7 @@ const STREAK_TASK = "water"; // id interno da tarefa de streak
 // retorna info do user logado
 const user = getLoggedUser();
 if (!user) {
-  alert("Erro: usuário não logado.");
+  alert("Error: user not logged in.");
 }
 
 // carrega banco
@@ -66,18 +66,18 @@ function loadStreak() {
   streakCount.textContent = streakData.count;
 
   if (streakData.lastComplete) {
-    lastCompleted.textContent = "Última conclusão: " + formatDate(streakData.lastComplete);
+    lastCompleted.textContent = "Last conclusion: " + formatDate(streakData.lastComplete);
   } else {
-    lastCompleted.textContent = "Você ainda não começou!";
+    lastCompleted.textContent = "You haven't started yet!";
   }
 
   // desabilitar botão se já completou hoje
   if (isToday(streakData.lastComplete)) {
     btn.disabled = true;
-    btn.textContent = "Já concluído hoje ✔";
+    btn.textContent = "Already completed today ✔";
   } else {
     btn.disabled = false;
-    btn.textContent = "Marcar como concluído hoje";
+    btn.textContent = "Mark as completed today";
   }
 }
 
@@ -101,5 +101,4 @@ btn.addEventListener("click", () => {
   loadStreak();
 });
 
-// iniciar
 loadStreak();

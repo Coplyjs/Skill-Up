@@ -314,7 +314,6 @@ body {
   border: 1px solid var(--lm-3);
 }
 
-/* Botões dentro do modal: sem gradiente */
 .modal .btn-outline-primary {
   color: #fff;
   border-color: var(--lm-3);
@@ -339,12 +338,10 @@ body {
   border: 1px solid var(--lm-3);
 }
 
-/* Placeholder branco levemente opaco dentro do modal */
 .modal .form-control::placeholder {
   color: rgba(255,255,255,0.85);
 }
 
-/* Theme alert popup (centralized) */
 
 .theme-alert {
   position: fixed;
@@ -356,14 +353,13 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 3000;
-  pointer-events: none; /* allow clicks through when hidden */
-  background: rgba(0,0,0,0); /* backdrop transitions to semi-opaque */
+  pointer-events: none;
+  background: rgba(0,0,0,0);
   transition: background 220ms ease;
 }
 
 .theme-alert[hidden] { display: none; }
 
-/* visible state for backdrop */
 .theme-alert.show {
   pointer-events: auto;
   background: rgba(0,0,0,0.35);
@@ -380,7 +376,7 @@ body {
   max-width: 90vw;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
   display: flex;
-  gap: 20px; /* increased gap as requested */
+  gap: 20px;
   align-items: center;
   justify-content: space-between;
   transform: translateY(-10px);
@@ -413,7 +409,6 @@ body {
   background: rgba(255,255,255,0.06);
 }
 
-/* Speech bubble with GIF - horizontal layout */
 .tasks-container {
   width: 100%;
   display: flex;
@@ -463,7 +458,6 @@ body {
   transition: transform 300ms cubic-bezier(.2,.9,.2,1), opacity 300ms ease;
 }
 
-/* Arrow pointing left (towards GIF) */
 .speech-bubble::after {
   content: "";
   position: absolute;
@@ -483,7 +477,6 @@ body {
 }
 
 
-/* Selects (dropdown) dentro do modal - usar a paleta em vez do fundo branco */
 .modal .form-select {
   background: var(--lm-2);
   color: #fff;
@@ -496,7 +489,6 @@ body {
   border-color: var(--lm-4);
 }
 
-/* Tentativa de estilizar opções selecionadas (nem todos os browsers aplicam estilos em <option>) */
 .modal .form-select option {
   background: var(--lm-2);
   color: #fff;
@@ -514,7 +506,6 @@ body {
   border: 1px solid var(--lm-3);
 }
 
-/* Placeholder branco levemente opaco dentro do modal */
 .modal .form-control::placeholder {
   color: rgba(255,255,255,0.85);
 }
@@ -532,8 +523,8 @@ button.btn.btn-outline-danger.btn-remover-ex:hover,
 button.btn.btn-outline-danger.btn-remover-ex:focus,
 .btn-remover-ex:hover,
 .btn-remover-ex:focus {
-  background: #dc3545 !important; /* fundo vermelho no hover */
-  color: #fff !important;         /* texto branco no hover */
+  background: #dc3545 !important;
+  color: #fff !important;
   border-color: #b02a37 !important;
 }
 
@@ -558,7 +549,6 @@ button.btn.btn-outline-danger.btn-remover-ex:active,
   transition-delay: 30ms;
 }
 
-/* Regras específicas da home (preservadas do arquivo antigo): tarefas, cards e botão flutuante */
 .tasks {
   padding-top: 2rem;
   margin-top: 2rem;
@@ -660,7 +650,6 @@ button.btn.btn-outline-danger.btn-remover-ex:active,
   transform: scale(1.05);
 }
 
-/* Desktop: layout compacto em uma linha */
 @media (min-width: 1024px) {
   .tasks .card {
     min-height: 80px;
@@ -704,11 +693,10 @@ button.btn.btn-outline-danger.btn-remover-ex:active,
   align-items: center;
 }
 
-/* Make the create task floating button clearly visible and clickable */
 .createTask {
   position: fixed;
   right: 20px;
-  bottom: 90px; /* above the bottom navigation */
+  bottom: 90px;
   height: 64px;
   width: 64px;
   border-radius: 50%;
