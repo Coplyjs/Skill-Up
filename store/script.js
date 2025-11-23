@@ -56,7 +56,7 @@ function buyProduct(productName) {
 
   // Verificar fins suficientes
   if (currentUser.fins < skin.price) {
-    alert(`Fins insuficientes! Você precisa de ${skin.price} fins, mas tem apenas ${currentUser.fins}.`);
+    alert(`Insufficient fins! You need ${skin.price} fins, but you only have ${currentUser.fins}.`);
     return;
   }
 
@@ -72,8 +72,7 @@ function buyProduct(productName) {
   saveUserData();
   updateFinDisplay();
 
-  alert(`✅ Parabéns! Você comprou a skin ${productName}! Agora você tem ${currentUser.fins} fins.\n\nVocê pode selecionar esta skin no seu Perfil!`);
-  updateProductButtons(); // Atualizar botões após compra
+alert(`✅ Congratulations! You bought the ${productName} skin! You now have ${currentUser.fins} fins.\n\nYou can select this skin in your Profile!`);  updateProductButtons(); // Atualizar botões após compra
 }
 
 function updateFinDisplay() {
@@ -92,12 +91,12 @@ function updateProductButtons() {
     buttons.forEach(btn => {
       if (currentUser.skins && currentUser.skins.includes(skin.id)) {
         // Já foi comprado
-        btn.textContent = "✅ Comprado";
+        btn.textContent = "✅ Item bought";
         btn.disabled = true;
         btn.classList.add("bought");
       } else {
         // Ainda não foi comprado
-        btn.textContent = "Comprar";
+        btn.textContent = "Purchase";
         btn.disabled = false;
         btn.classList.remove("bought");
       }

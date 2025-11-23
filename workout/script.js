@@ -1,4 +1,4 @@
-const API_KEY = "";
+const API_KEY = "4LaR3eumIcD1XhDBIIe9lA==DBTOTA9lW2ji4TBW";
 let treinos = [];
 const allMuscles = [
   "abdominals","abductors","adductors","biceps","calves","chest",
@@ -74,19 +74,19 @@ function addCampoExercicio() {
   div.innerHTML = `
     <div class="row g-2 align-items-end">
       <div class="col-md-4">
-        <label class="form-label mb-1">Músculo</label>
-        <input type="text" class="form-control exMusculo" placeholder="ex: chest, biceps" autocomplete="off">
+        <label class="form-label mb-1">Muscle</label>
+        <input type="text" class="form-control exMusculo" placeholder="Ex: chest, biceps" autocomplete="off">
         <div class="sugestoes-musculo list-group mt-1" style="display:none;"></div>
       </div>
 
       <div class="col-md-4">
-        <label class="form-label mb-1">Exercício</label>
-        <input type="text" class="form-control exNome" placeholder="Escolha um exercício" readonly>
+        <label class="form-label mb-1">Exercises</label>
+        <input type="text" class="form-control exNome" placeholder="Choose an exercise" readonly>
         <div class="sugestoes-ex list-group mt-1" style="display:none;"></div>
       </div>
 
       <div class="col-6 col-md-2">
-        <label class="form-label mb-1">Séries</label>
+        <label class="form-label mb-1">Sets</label>
         <input type="number" class="form-control exSeries" min="1" value="3">
       </div>
 
@@ -96,12 +96,12 @@ function addCampoExercicio() {
       </div>
 
       <div class="col-6 col-md-2 mt-2">
-        <label class="form-label mb-1">Carga (kg)</label>
+        <label class="form-label mb-1">Weight (kg)</label>
         <input type="number" class="form-control exPeso" min="0" step="0.5" placeholder="kg">
       </div>
 
       <div class="col-6 col-md-2 mt-2 d-flex align-items-end">
-        <button type="button" class="btn btn-outline-danger w-100 btn-remover-ex">Remover</button>
+        <button type="button" class="btn btn-outline-danger w-100 btn-remover-ex">Remove</button>
       </div>
     </div>
   `;

@@ -1,4 +1,4 @@
-const apiKey = "";
+const apiKey = "4ta7q3VUgJWJzNpU32dxDkVGhsasDbglvf6PRXBA";
 let refeicoes = [];
 let totalGeral = 0;
 let modal;
@@ -27,7 +27,7 @@ function addCampoAlimento() {
 
   div.innerHTML = `
     <div class="input-group">
-      <input type="text" class="form-control alimentoNome" placeholder="Buscar alimento...">
+      <input type="text" class="form-control alimentoNome" placeholder="Food">
       <input type="number" class="form-control alimentoQtd" placeholder="g" min="1">
       <input type="number" class="form-control alimentoCal" placeholder="kcal" readonly>
       <button class="btn btn-danger" type="button" onclick="this.parentElement.parentElement.remove()">
