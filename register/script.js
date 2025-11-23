@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
       diet: [],
       skins: ["default"],
       selectedSkin: "default",
+      streak: [],
       createdAt: new Date().toISOString()
     };
 

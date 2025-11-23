@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Streak</title>
 
-    <!-- Bootstrap CSS & Icons-->
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- CSS-->
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-
 </head>
+
 <body>
+
+<!-- NAV -->
 <nav class="nav">
 
   <div class="fixed-bottom-buttons">
@@ -50,11 +52,35 @@
 
 </nav>
 
-  <div class="page-header">
-    <img src="/icons/images/SkillUp-logo.svg" alt="Logo" class="page-logo" />
-    <h1 class="page-title">Streak</h1>
+<!-- HEADER -->
+<div class="page-header">
+  <img src="/icons/images/SkillUp-logo.svg" alt="Logo" class="page-logo" />
+  <h1 class="page-title">Streak</h1>
+</div>
+
+<div class="main-content">
+
+  <div class="card" style="padding:20px; text-align:center;">
+    <h2>Beber 2L de Água</h2>
+    <p>Complete diariamente para manter seu streak 🔥</p>
+
+    <h1 id="streakCount" style="font-size:4rem; margin:20px 0;">0</h1>
+
+    <button id="completeToday" class="btn btn-success" style="font-size:1.2rem;">Concluir</button>
+
+    <p id="lastCompleted" style="margin-top:15px; opacity:0.8;"></p>
   </div>
 
-  <script src="script.js"></script>
+</div>
+
+<!-- Storage -->
+<script src="/storage.js"></script>
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Script Streak -->
+<script src="script.js"></script>
+
 </body>
 </html>
