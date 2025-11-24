@@ -1,6 +1,5 @@
 let currentUser = null;
 
-// Mapear botões para skins
 const skinMap = {
   1: "default",
   2: "Halloween",
@@ -8,7 +7,6 @@ const skinMap = {
   4: "Christmas"
 };
 
-// ✅ Quando a página carregar
 window.onload = () => {
     currentUser = getLoggedUser();
 
@@ -17,7 +15,6 @@ window.onload = () => {
         document.getElementById('email').textContent = currentUser.email || 'N/A';
         document.getElementById('fins').textContent = currentUser.fins || '0';
 
-        // Inicializar skins se não existirem (compatibilidade com usuários antigos)
         if (!currentUser.skins) {
           currentUser.skins = ["default"];
         }
@@ -60,7 +57,6 @@ function togglePassword() {
 }
 
 function renderSkinsState() {
-    // Renderizar estado de cada botão (disabled/enabled baseado em skins compradas)
     Object.keys(skinMap).forEach(btnId => {
         const skinId = skinMap[btnId];
         const button = document.getElementById(`btn${btnId}`);
@@ -91,7 +87,7 @@ function renderSkinsState() {
 function selectSkin(skinId) {
     // Verificar se o usuário possui a skin
     if (!currentUser.skins || !currentUser.skins.includes(skinId)) {
-        alert(`❌ Você ainda não comprou a skin ${skinId}! Compre no Store.`);
+    alert(`❌ You haven't purchased the ${skinId} skin yet! Buy it in the Store.`);
         return;
     }
 
@@ -103,7 +99,7 @@ function selectSkin(skinId) {
     // Disparar evento customizado para o home
     window.dispatchEvent(new CustomEvent('skinChanged', { detail: { skinId: skinId } }));
 
-    alert(`✅ Você selecionou a skin ${skinId}!`);
+    alert(`✅ You have selected the skin ${skinId}!`);
 }
 
 function saveUserData() {
@@ -113,7 +109,7 @@ function saveUserData() {
     localStorage.setItem("loggedUser", JSON.stringify(currentUser));
 
     // Salvar no banco de dados (storage)
-    const dbObj = loadData(); // { users: [...] }
+    const dbObj = loadData()
     const db = dbObj.users;
 
     const idx = db.findIndex(u => u.email === currentUser.email);
