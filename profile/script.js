@@ -96,7 +96,6 @@ function selectSkin(skinId) {
     saveUserData();
     renderSkinsState();
 
-    // Disparar evento customizado para o home
     window.dispatchEvent(new CustomEvent('skinChanged', { detail: { skinId: skinId } }));
 
     alert(`✅ You have selected the skin ${skinId}!`);

@@ -6,7 +6,7 @@ let lastSkinLoaded = null;
 
 // Mapa de skins com seus GIFs/PNGs
 const skinGifs = {
-  "default": "/icons/base-icons/happy-icon.png",
+  "default": "/icons/base-icons/Sig_padrao.gif",
   "Christmas": "/icons/christmas-icon/happy-icon-christmas.png",
   "Pirates": "/icons/pirate-icons/happy-icon-pirate.png",
   "Halloween": "/icons/halloween-icons/happy-icon-halloween.png"
