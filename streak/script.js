@@ -1,77 +1,86 @@
-// --- CONFIGURAÇÃO ---
-const STREAK_TASK = "water"; // id interno da tarefa de streak
+const STREAK_TASK = "water";
 
-// retorna info do user logado
-const user = getLoggedUser();
-if (!user) {
-  alert("Error: user not logged in.");
+let streakUser = null;
+let streakData = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadStreakUser();
+  initStreakData();
+  renderStreak();
+});
+
+function loadStreakUser() {
+  streakUser = getLoggedUser();
+
+  if (!streakUser) {
+    alert("Erro: Nenhum usuário logado!");
+    return;
+  }
 }
 
-// carrega banco
-const db = loadData();
 
-// procura usuário no db real
-const realUser = db.users.find(u => u.email === user.email);
+function initStreakData() {
+  const dbObj = loadData(); // { users:[] }
+  const db = dbObj.users;
 
-// cria estrutura caso não exista
-if (!realUser.streaks) {
-  realUser.streaks = {};
-}
-if (!realUser.streaks[STREAK_TASK]) {
-  realUser.streaks[STREAK_TASK] = {
-    count: 0,
-    lastComplete: null
-  };
-  saveData(db);
-}
+  const realUser = db.find(u => u.email === streakUser.email);
 
-const streakData = realUser.streaks[STREAK_TASK];
+  if (!realUser.streaks) realUser.streaks = {};
+  if (!realUser.streaks[STREAK_TASK]) {
+    realUser.streaks[STREAK_TASK] = {
+      count: 0,
+      lastComplete: null // salvo sempre YYYY-MM-DD
+    };
+  }
 
-// ELEMENTOS
-const streakCount = document.getElementById("streakCount");
-const lastCompleted = document.getElementById("lastCompleted");
-const btn = document.getElementById("completeToday");
+  streakData = realUser.streaks[STREAK_TASK];
 
-// 🟦 Função auxiliar para formatar datas (YYYY-MM-DD)
-function formatDate(date) {
-  const d = new Date(date);
-  return d.toISOString().split("T")[0];
+  saveData(dbObj);
 }
 
-// 🟦 Verifica se a data é hoje
-function isToday(date) {
-  return formatDate(new Date()) === formatDate(date);
+
+function todayStr() {
+  return new Date().toISOString().split("T")[0];
 }
 
-// 🟦 Verifica se a data é ontem
-function isYesterday(date) {
-  const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(today.getDate() - 1);
-  return formatDate(yesterday) === formatDate(date);
+function isToday(dateStr) {
+  return dateStr === todayStr();
 }
 
-// --- CARREGAR STATUS ---
-function loadStreak() {
-  // RESET AUTOMÁTICO se pulou algum dia
+function isYesterday(dateStr) {
+  const y = new Date();
+  y.setDate(y.getDate() - 1);
+  return dateStr === y.toISOString().split("T")[0];
+}
+
+
+function renderStreak() {
+  const countEl = document.getElementById("streakCount");
+  const lastEl = document.getElementById("lastCompleted");
+  const btn = document.getElementById("completeToday");
+
+  if (!countEl || !lastEl || !btn) {
+    console.error("Erro: elementos da streak não encontrados!");
+    return;
+  }
+
   if (
     streakData.lastComplete &&
     !isToday(streakData.lastComplete) &&
     !isYesterday(streakData.lastComplete)
   ) {
     streakData.count = 0;
-    saveData(db);
+    saveStreakData();
   }
 
-  streakCount.textContent = streakData.count;
+  countEl.textContent = streakData.count;
 
   if (streakData.lastComplete) {
-    lastCompleted.textContent = "Last conclusion: " + formatDate(streakData.lastComplete);
+    lastEl.textContent = "Last conclusion: " + streakData.lastComplete;
   } else {
-    lastCompleted.textContent = "You haven't started yet!";
+    lastEl.textContent = "You haven't started yet!";
   }
 
-  // desabilitar botão se já completou hoje
   if (isToday(streakData.lastComplete)) {
     btn.disabled = true;
     btn.textContent = "Already completed today ✔";
@@ -79,26 +88,41 @@ function loadStreak() {
     btn.disabled = false;
     btn.textContent = "Mark as completed today";
   }
+
+  btn.onclick = completeStreakToday;
 }
 
-// --- COMPLETAR O DIA ---
-btn.addEventListener("click", () => {
-  const today = new Date();
 
-  if (streakData.lastComplete && isToday(streakData.lastComplete)) {
-    return; // já foi concluído
-  }
+function completeStreakToday() {
+  const today = todayStr();
+
+  if (isToday(streakData.lastComplete)) return;
 
   if (isYesterday(streakData.lastComplete)) {
-    streakData.count += 1; // continuidade
+    streakData.count += 1;
   } else {
-    streakData.count = 1; // começa de novo
+    streakData.count = 1;
   }
 
   streakData.lastComplete = today;
 
-  saveData(db);
-  loadStreak();
-});
+  saveStreakData();
+  renderStreak();
+}
 
-loadStreak();
+
+function saveStreakData() {
+  const dbObj = loadData();
+  const db = dbObj.users;
+
+  const idx = db.findIndex(u => u.email === streakUser.email);
+  if (idx === -1) return;
+
+  if (!db[idx].streaks) db[idx].streaks = {};
+  db[idx].streaks[STREAK_TASK] = streakData;
+
+  saveData(dbObj);
+
+  streakUser.streaks = db[idx].streaks;
+  localStorage.setItem("loggedUser", JSON.stringify(streakUser));
+}
